@@ -1,11 +1,22 @@
+/*
+ * System: PageRouter
+ * Create: 2016-07-15
+ */
 'use strict';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Router, Route, browserHistory} from 'react-router';
 
-const main_page = (
-    <div>Hello World!</div>
+import MainPage from './pages/MainPage';
+import NotFoundPage from './pages/NotFoundPage';
+
+const PageRouter = (
+    <Router history={browserHistory}>
+        <Route path="/" component={MainPage} />
+        <Route path="*" component={NotFoundPage} />
+    </Router>
 );
 
 // React Start!
-ReactDOM.render(main_page, document.getElementById('react-root'));
+ReactDOM.render(PageRouter, document.getElementById('react-root'));
