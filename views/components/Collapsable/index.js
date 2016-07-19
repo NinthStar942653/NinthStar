@@ -13,19 +13,19 @@ import style from './style';
 
 const Collapsable = React.createClass({
     render() {
-        const COLLAPSABLE_CLASS = classNames([material.shadow1]);
+        // Get props
+        const {className: CLASSNAME, children: CHILDREN, ...PROPS} = this.props;
+        
+        // Set classNames
+        const COLLAPSABLE_CLASS = classNames([CLASSNAME, material.shadow1]);
         
         return (
-            <div className={COLLAPSABLE_CLASS}>
+            <div className={COLLAPSABLE_CLASS} {...PROPS}>
                 {
-                    React.Children.map(this.props.children, content => {
+                    React.Children.map(CHILDREN, item => {
                         {
                             return (
-                                <CollapsableItem name={content.props.name}>
-                                    {
-                                        content.props.children
-                                    }
-                                </CollapsableItem>
+                                <CollapsableItem {...item.props}/>
                             );
                         }
                     })
@@ -38,39 +38,40 @@ const Collapsable = React.createClass({
 const CollapsableItem = React.createClass({
     getInitialState() {
         return {
-            active: Boolean(this.props.active !== undefined)
+            active: this.props.active !== undefined
         };
     },
     render() {
-        const ITEM_CLASS = classNames([style.item]);
+        // Get props
+        const {className: CLASSNAME, name: NAME, active, ...PROPS} = this.props;
+        
+        // Set classNames
+        const ITEM_CLASS = classNames([CLASSNAME, style.item]);
         
         return (
-            <div className={ITEM_CLASS}>
-                <CollapsableTrigger clickCallback={this.clickCallback}>
+            <div className={ITEM_CLASS} {...PROPS}>
+                <CollapsableTrigger collapsableTrigger={this.collapsableTrigger}>
                     {
-                        this.props.name
+                        NAME
                     }
                 </CollapsableTrigger>
-                <CollapsablePanel active={Boolean(this.state.active)}>
-                    {
-                        this.props.children
-                    }
-                </CollapsablePanel>
+                <CollapsablePanel active={this.state.active} {...PROPS}/>
             </div>
         );
     },
-    clickCallback() {
+    collapsableTrigger() {
         this.setState({
-            active: Boolean(!this.state.active)
+            active: !this.state.active
         });
     }
 });
 
 const CollapsableTrigger = React.createClass({
     handleClick() {
-        this.props.clickCallback();
+        this.props.collapsableTrigger();
     },
     render() {
+        // Set classNames
         const TRIGGER_CLASS = classNames([material.shadow1, style.trigger]);
         
         return (
@@ -84,18 +85,27 @@ const CollapsableTrigger = React.createClass({
 });
 
 const CollapsablePanel = React.createClass({
-    componentWillMount() {
-        //this.height = getNode(this).clientHeight;
-        //this.props.style = {height: this.props.active ? this.height + 'px' : 0};
+    getInitialState() {
+        return {
+            height: 0
+        };
+    },
+    componentDidMount() {
+        let comp = this;
+        let node = getNode(this);
+        console.log(node);
+        comp.setState({
+            height: node.offsetHeight
+        });
     },
     render() {
+        const {className: CLASSNAME, style: STYLE, active, ...PROPS} = this.props;
+        
+        // Set classNames
         const PANEL_CLASS = classNames([style.panel]);
+        
         return (
-            <div className={PANEL_CLASS} style={this.props.active ? {height: this.height + 'px'} : {height: 0}}>
-                {
-                    this.props.children
-                }
-            </div>
+            <div className={PANEL_CLASS} style={{height: this.state.height === 0 ? 'auto' : this.props.active ? this.state.height : 0, ...STYLE}} {...PROPS}/>
         );
     }
 });
