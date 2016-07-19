@@ -6,7 +6,7 @@
 'use strict';
 
 import React from 'react';
-import classnames from '../../public/classnames';
+import classNames from '../../public/classNames';
 
 import material from '../../public/material';
 import style from './style';
@@ -40,29 +40,29 @@ const Tab = React.createClass({
         }
     },
     render() {
-        // Set classnames
-        const TAB_CLASS = classnames([style.tab]);
-        const SELECTOR_CLASS = classnames([material.row, material.shadow1, style.selectors]);
+        // Get props
+        const {className: CLASSNAME, children: CHILDREN, ...PROPS} = this.props;
+        
+        // Set classNames
+        const TAB_CLASS = classNames([CLASSNAME, style.tab]);
+        const SELECTOR_CLASS = classNames([style.selectors, material.row, material.shadow1, ]);
         const SELECTOR_STYLE = {
-            width: 100 / this.props.children.length + '%'
+            width: 100 / CHILDREN.length + '%'
         };
-        const INDICATOR_CLASS = classnames([material.colorBlue, material.animate, style.indicator]);
+        const INDICATOR_CLASS = classNames([style.indicator, material.colorBlue, material.animate]);
         const INDICATOR_STYLE = {
-            marginLeft: 100 * this.state.active_index / this.props.children.length + '%',
-            width: 100 / this.props.children.length + '%'
+            marginLeft: 100 * this.state.active_index / CHILDREN.length + '%',
+            width: 100 / CHILDREN.length + '%'
         };
-        const PANELS_CLASS = classnames([style.panels]);
-        const PANELS_STYLE = {
-            marginLeft: -100 * this.state.active_index + '%'
-        };
+        const PANELS_CLASS = classNames([style.panels, material.animate]);
         
         return (
-            <div className={TAB_CLASS}>
+            <div className={TAB_CLASS} {...PROPS}>
                 <div className={SELECTOR_CLASS}>
                     {
-                        React.Children.map(this.props.children, (panel, index) => {
+                        React.Children.map(CHILDREN, (panel, index) => {
                             return (
-                                <TabSelector style={SELECTOR_STYLE} index={index} clickCallBack={this.clickCallBack}>
+                                <TabSelector style={SELECTOR_STYLE} index={index} tabSelect={this.tabSelect}>
                                     {
                                         panel.props.name
                                     }
@@ -74,13 +74,15 @@ const Tab = React.createClass({
                 <div className={INDICATOR_CLASS} style={INDICATOR_STYLE}></div>
                 <div className={PANELS_CLASS}>
                     {
-                        React.Children.map(this.props.children, (panel, index) => {
+                        React.Children.map(CHILDREN, (panel, index) => {
+                            let {style: panel_style, name, ...PROPS} = panel.props;
+                            
+                            if (index === 0) {
+                                panel_style.marginLeft = -100 * this.state.active_index + '%';
+                            }
+                            
                             return (
-                                <TabPanel style={index === 0 ? PANELS_STYLE : {}}>
-                                    {
-                                        panel.props.children
-                                    }
-                                </TabPanel>
+                                <TabPanel style={panel_style} {...PROPS}/>
                             );
                         })
                     }
@@ -88,7 +90,7 @@ const Tab = React.createClass({
             </div>
         );
     },
-    clickCallBack(new_active_index) {
+    tabSelect(new_active_index) {
         this.setState({
             active_index: new_active_index
         });
@@ -97,32 +99,31 @@ const Tab = React.createClass({
 
 const TabSelector = React.createClass({
     handleClick() {
-        this.props.clickCallBack(this.props.index);
+        this.props.tabSelect(this.props.index);
     },
     render() {
-        // Set classnames
-        const SelectorClass = classnames([material.col, style.selector]);
+        // Get props
+        const {className: CLASSNAME, index, tabSelect, ...PROPS} = this.props;
+        
+        // Set classNames
+        const SelectorClass = classNames([CLASSNAME, style.selector, material.col]);
         
         return (
-            <div className={SelectorClass} style={this.props.style} onClick={this.handleClick}>
-                {
-                    this.props.children
-                }
-            </div>
+            <div className={SelectorClass} onClick={this.handleClick} {...PROPS}/>
         );
     }
 });
 
 const TabPanel = React.createClass({
     render() {
-        // Set classnames
-        const PANEL_CLASS = classnames([material.animate, style.panel]);
+        // Get props
+        const {className: CLASSNAME, active, ...PROPS} = this.props;
+        
+        // Set classNames
+        const PANEL_CLASS = classNames([CLASSNAME, style.panel]);
+        
         return (
-            <div className={PANEL_CLASS} style={this.props.style}>
-                {
-                    this.props.children
-                }
-            </div>
+            <div className={PANEL_CLASS} {...PROPS}/>
         );
     }
 });
