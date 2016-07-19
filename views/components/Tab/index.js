@@ -79,6 +79,7 @@ const Tab = React.createClass({
                             
                             return (
                                 <TabPanel ofs={index === 0 ? -100 * this.state.active_index + '%' : 0} {...PROPS}/>
+
                             );
                         })
                     }

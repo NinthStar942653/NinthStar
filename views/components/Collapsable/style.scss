@@ -1,0 +1,19 @@
+/*
+ * Component: Collapsable
+ * Create:    2016-07-18
+ */
+.item {
+    overflow: hidden;
+    background-color: #EEE;
+    
+    .trigger {
+        background-color: #FFF;
+        border-top: 1px solid #DDD;
+        cursor: pointer;
+    }
+    .panel {
+        overflow: hidden;
+        border-top: 1px solid #DDD;
+        transition-duration: 0.5s;
+    }
+}
