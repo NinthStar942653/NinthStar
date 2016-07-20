@@ -79,7 +79,7 @@ const Collapsable = React.createClass({
             active[index] = !active[index];
         } else {
             for (let i = 0, l = active.length; i < l; ++i) {
-                active[i] =  i === index;
+                active[index] = i === index ? !active[index] : false;
             }
         }
         
