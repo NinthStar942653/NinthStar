@@ -91,11 +91,8 @@ const CollapsablePanel = React.createClass({
         };
     },
     componentDidMount() {
-        let comp = this;
-        let node = getNode(this);
-        console.log(node);
-        comp.setState({
-            height: node.offsetHeight
+        this.setState({
+            height: getNode(this).offsetHeight
         });
     },
     render() {
