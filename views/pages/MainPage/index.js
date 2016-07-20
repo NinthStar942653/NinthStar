@@ -27,7 +27,7 @@ const MainPage = React.createClass({
                         <h3>Tab Panel 4</h3>
                     </TabPanel>
                 </Tab>
-                <Collapsable>
+                <Collapsable accordion>
                     <CollapsablePanel name="Collapsable 1" active>
                         <div>
                             <p>Collapsable Panel 1</p>

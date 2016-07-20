@@ -12,63 +12,107 @@ import material from '../../public/material';
 import style from './style';
 
 const Collapsable = React.createClass({
+    getInitialState() {
+        return {
+            active: []
+        };
+    },
+    componentDidMount() {
+        // Get props
+        const {children: CHILDREN, accordion: ACCORDION, ...PROPS} = this.props;
+            
+        let active_index = null;
+        let active = [];
+        
+        React.Children.map(CHILDREN, (item, index) => {
+            const {active: ACTIVE, ...PORPS} = item.props;
+            
+            if (ACTIVE === undefined) {
+                active[index] = false;
+            } else {
+                if (ACCORDION === undefined) {
+                    active[index] = true;
+                } else {
+                    if (active_index === null) {
+                        active_index = index;
+                        active[index] = true;
+                    } else {
+                        active[index] = false;
+                        console.warn('[Collapsable] More than one active panel in accordion type. Only the first one will be set active.');
+                    }
+                }
+            }
+        });
+        
+        this.setState({
+            active: active
+        });
+    },
     render() {
         // Get props
-        const {className: CLASSNAME, children: CHILDREN, ...PROPS} = this.props;
+        const {className: CLASSNAME, children: CHILDREN, accordion, ...PROPS} = this.props;
         
         // Set classNames
         const COLLAPSABLE_CLASS = classNames([CLASSNAME, material.shadow1]);
         
+        let active_index = null;
+        
         return (
             <div className={COLLAPSABLE_CLASS} {...PROPS}>
                 {
-                    React.Children.map(CHILDREN, item => {
-                        {
-                            return (
-                                <CollapsableItem {...item.props}/>
-                            );
-                        }
+                    React.Children.map(CHILDREN, (item, index) => {
+                        const {active, ...PROPS} = item.props;
+                        
+                        return (
+                            <CollapsableItem index={index} active={this.state.active[index]} collapsableTrigger={this.collapsableTrigger} {...PROPS}/>
+                        );
                     })
                 }
             </div>
         );
+    },
+    collapsableTrigger(index) {
+        const ACCORDION = this.props.accordion;
+        let active = this.state.active;
+        
+        if (ACCORDION === undefined) {
+            active[index] = !active[index];
+        } else {
+            for (let i = 0, l = active.length; i < l; ++i) {
+                active[i] =  i === index;
+            }
+        }
+        
+        this.setState({
+            active: active
+        });
     }
 });
 
 const CollapsableItem = React.createClass({
-    getInitialState() {
-        return {
-            active: this.props.active !== undefined
-        };
-    },
     render() {
         // Get props
-        const {className: CLASSNAME, name: NAME, active, ...PROPS} = this.props;
+        const {className: CLASSNAME, name: NAME, index: INDEX, collapsableTrigger: COLLAPSABLE_TRIGGER, ...PROPS} = this.props;
         
         // Set classNames
         const ITEM_CLASS = classNames([CLASSNAME, style.item]);
         
         return (
-            <div className={ITEM_CLASS} {...PROPS}>
-                <CollapsableTrigger collapsableTrigger={this.collapsableTrigger}>
+            <div className={ITEM_CLASS}>
+                <CollapsableTrigger index={INDEX} collapsableTrigger={COLLAPSABLE_TRIGGER}>
                     {
                         NAME
                     }
                 </CollapsableTrigger>
-                <CollapsablePanel active={this.state.active} {...PROPS}/>
+                <CollapsablePanel {...PROPS}/>
             </div>
         );
-    },
-    collapsableTrigger() {
-        this.setState({
-            active: !this.state.active
-        });
     }
 });
 
 const CollapsableTrigger = React.createClass({
     handleClick() {
-        this.props.collapsableTrigger();
+        this.props.collapsableTrigger(this.props.index);
     },
     render() {
         // Set classNames
