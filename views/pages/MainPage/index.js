@@ -8,12 +8,13 @@ import React from 'react';
 
 import {Tab, TabPanel} from '../../components/Tab';
 import {Collapsable, CollapsablePanel} from '../../components/Collapsable';
+import {Ripple} from '../../components/Ripple';
 
 const MainPage = React.createClass({
     render() {
         return (
             <div>
-                <Tab className="tab" style={{color: "blue"}}>
+                <Tab style={{color: "blue"}}>
                     <TabPanel name="Tab 1" style={{color: "red"}}>
                         <h3>Tab Panel 1</h3>
                     </TabPanel>
@@ -50,6 +51,9 @@ const MainPage = React.createClass({
                         </div>
                     </CollapsablePanel>
                 </Collapsable>
+                <div style={{width: 100, height: 100, backgroundColor: "#00F"}}>
+                    <Ripple/>
+                </div>
             </div>
         );
     }
