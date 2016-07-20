@@ -8,7 +8,7 @@ import React from 'react';
 import classNames from '../../public/classNames';
 import getNode from '../../public/getNode';
 
-import material from '../../public/material';
+import material from '../../public/material/material.scss';
 import style from './style';
 
 const Collapsable = React.createClass({

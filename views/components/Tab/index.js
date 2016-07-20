@@ -8,13 +8,13 @@
 import React from 'react';
 import classNames from '../../public/classNames';
 
-import material from '../../public/material';
+import material from '../../public/material/material.scss';
 import style from './style';
 
 const Tab = React.createClass({
     getInitialState() {
         return {
-            active_index: -1
+            active_index: null
         };
     },
     componentWillMount() {
