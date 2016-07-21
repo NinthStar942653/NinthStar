@@ -58,8 +58,6 @@ const Ripple = React.createClass({
                 effectsProps.shift();
             }
             
-            console.log(effectsProps);
-            
             RIPPLE.setState({
                 effectsProps: effectsProps
             });
@@ -70,53 +68,39 @@ const Ripple = React.createClass({
 const RippleEffect = React.createClass({
     getInitialState() {
         return {
-            ready: false,
-            animating: true,
-            pressing: true
+            show: false,
+            hide: false
         };
     },
     componentDidMount() {
         const RIPPLE_EFFECT = this;
+        
         setTimeout(function() {
             RIPPLE_EFFECT.setState({
-                ready: true
+                show: true
             });
             
             setTimeout(function() {
                 RIPPLE_EFFECT.setState({
-                    animating: false
+                    hide: true
                 });
                 
-                if (!RIPPLE_EFFECT.state.pressing) {
-                    RIPPLE_EFFECT.props.rippleHide(RIPPLE_EFFECT.props.effectProps.key);
-                }
+                RIPPLE_EFFECT.props.rippleHide(RIPPLE_EFFECT.props.effectProps.key);
             }, 500);
         }, 1);
-    },
-    shouldComponentUpdate(nextProps, nextState) {
-        return this.state.ready !== nextState.ready || (!this.state.animating && !this.state.pressing);
     },
     render() {
         const RIPPLE_EFFECT_CLASS = classNames([style.rippleEffect, material.animate]);
         const RIPPLE_EFFECT_STYLE = {
             top: this.props.effectProps.y,
             left: this.props.effectProps.x,
-            transform: this.state.ready ? 'scale(' + this.props.effectProps.scale + ')' : '',
-            opacity: !this.state.animating && !this.state.pressing ? 0 : ''
+            transform: this.state.show ? 'scale(' + this.props.effectProps.scale + ')' : '',
+            opacity: this.state.hide ? 0 : 0.25
         };
         
         return (
-            <div className={RIPPLE_EFFECT_CLASS} style={RIPPLE_EFFECT_STYLE} onMouseUp={this.release} onMouseLeave={this.release}/>
+            <div className={RIPPLE_EFFECT_CLASS} style={RIPPLE_EFFECT_STYLE}/>
         );
-    },
-    release() {
-        this.setState({
-            pressing: false
-        });
-        
-        if (!this.state.animating) {
-            this.props.rippleHide(this.props.effectProps.key);
-        }
     }
 });
 
