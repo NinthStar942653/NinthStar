@@ -58,8 +58,6 @@ const Ripple = React.createClass({
                 effectsProps.shift();
             }
             
-            console.log(effectsProps);
-            
             RIPPLE.setState({
                 effectsProps: effectsProps
             });
@@ -77,6 +75,7 @@ const RippleEffect = React.createClass({
     },
     componentDidMount() {
         const RIPPLE_EFFECT = this;
+        
         setTimeout(function() {
             RIPPLE_EFFECT.setState({
                 ready: true
