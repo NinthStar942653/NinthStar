@@ -5,8 +5,8 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import classNames from '../../public/classNames';
-import getNode from '../../public/getNode';
 
 import material from '../../public/material/material.scss';
 import style from './style';
@@ -34,13 +34,14 @@ const Ripple = React.createClass({
         );
     },
     rippleShow(evt) {
+        const RIPPLE = ReactDOM.findDOMNode(this);
         let effectsProps = this.state.effectsProps;
         
         effectsProps.push({
             key: this.state.counter,
-            x: evt.pageX - getNode(this).getBoundingClientRect().left,
-            y: evt.pageY - getNode(this).getBoundingClientRect().top,
-            scale: Math.sqrt(getNode(this).offsetWidth * getNode(this).offsetWidth + getNode(this).offsetHeight * getNode(this).offsetHeight)
+            x: evt.pageX - RIPPLE.getBoundingClientRect().left,
+            y: evt.pageY - RIPPLE.getBoundingClientRect().top,
+            scale: Math.sqrt(RIPPLE.offsetWidth * RIPPLE.offsetWidth + RIPPLE.offsetHeight * RIPPLE.offsetHeight)
         });
         
         this.setState({
