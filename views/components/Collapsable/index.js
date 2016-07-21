@@ -5,8 +5,8 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import classNames from '../../public/classNames';
-import getNode from '../../public/getNode';
 
 import material from '../../public/material/material.scss';
 import style from './style';
@@ -136,7 +136,7 @@ const CollapsablePanel = React.createClass({
     },
     componentDidMount() {
         this.setState({
-            height: getNode(this).offsetHeight
+            height: ReactDOM.findDOMNode(this).offsetHeight
         });
     },
     render() {
