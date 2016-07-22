@@ -101,16 +101,16 @@
  * Style:  Shadow
  * Create: 2016-07-15
  */
-.shadow1 { position: relative; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 4px 10px 0 rgba(0, 0, 0, 0.12); }
-.shadow2 { position: relative; box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.18), 0 9px 20px 0 rgba(0, 0, 0, 0.16); }
-.shadow3 { position: relative; box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.2), 0 16px 32px 0 rgba(0, 0, 0, 0.2); }
-.shadow4 { position: relative; box-shadow: 0 17px 20px 0 rgba(0, 0, 0, 0.2), 0 25px 48px 0 rgba(0, 0, 0, 0.2); }
+.shadow1 { box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 4px 10px 0 rgba(0, 0, 0, 0.12); }
+.shadow2 { box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.18), 0 9px 20px 0 rgba(0, 0, 0, 0.16); }
+.shadow3 { box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.2), 0 16px 32px 0 rgba(0, 0, 0, 0.2); }
+.shadow4 { box-shadow: 0 17px 20px 0 rgba(0, 0, 0, 0.2), 0 25px 48px 0 rgba(0, 0, 0, 0.2); }
 
 /*
  * Style:  Hover
  * Create: 2016-07-22
  */
-.hover { position: relative; transition-duration: 0.5s; }
+.hover { transition-duration: 0.5s; }
 	.hover.shadow0:hover { box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 4px 10px 0 rgba(0, 0, 0, 0.12); }
 	.hover.shadow1:hover { box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.18), 0 9px 20px 0 rgba(0, 0, 0, 0.16); }
 	.hover.shadow2:hover { box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.2), 0 16px 32px 0 rgba(0, 0, 0, 0.2); }
