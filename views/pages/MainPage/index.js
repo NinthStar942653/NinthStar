@@ -10,6 +10,7 @@ import {Tab, TabPanel} from '../../components/Tab';
 import {Collapsable, CollapsablePanel} from '../../components/Collapsable';
 import {Ripple} from '../../components/Ripple';
 import {Dialog} from '../../components/Dialog';
+import {Button} from '../../components/Button';
 
 const MainPage = React.createClass({
     render() {
@@ -57,6 +58,7 @@ const MainPage = React.createClass({
                         <Ripple/>
                     </div>
                 </Dialog>
+                <Button style={{width: 100, height: 100}}/>
             </div>
         );
     }
