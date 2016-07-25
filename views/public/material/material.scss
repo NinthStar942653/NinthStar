@@ -127,6 +127,21 @@
 	.hover.colorBlue.darken4:hover { background-color: #1565C0; }
 
 /*
+ * Style:  Active
+ * Create: 2016-07-25
+ */
+.active { transition-duration: 0.5s; }
+	.active.colorBlue:active { background-color: #64B5F6; }
+	.active.colorBlue.lighten1:active { background-color: #90CAF9; }
+	.active.colorBlue.lighten2:active { background-color: #BBDEFB; }
+	.active.colorBlue.lighten3:active { background-color: #E3F2FD; }
+	.active.colorBlue.lighten4:active { background-color: #E3F2FD; }
+	.active.colorBlue.darken1:active { background-color: #42A5F5; }
+	.active.colorBlue.darken2:active { background-color: #2196F3; }
+	.active.colorBlue.darken3:active { background-color: #1E88E5; }
+	.active.colorBlue.darken4:active { background-color: #1976D2; }
+	
+/*
  * Style: Animate
  * Create: 2016-07-18
  */
