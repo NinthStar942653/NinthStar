@@ -14,12 +14,15 @@ import {Ripple} from '../Ripple';
 
 export const Button = React.createClass({
 	render() {
-		const {className: CLASSNAME, ...PROPS} = this.props;
+		const {className: CLASSNAME, children: CHILDREN, ...PROPS} = this.props;
 		const BUTTON_CLASS = classNames([CLASSNAME, style.button, material.colorBlue, material.shadow2, material.hover, material.active, material.animate]);
 		
 		return (
 			<div className={BUTTON_CLASS} {...PROPS}>
 				<Ripple/>
+				{
+					CHILDREN
+				}
 			</div>
 		);
 	}
