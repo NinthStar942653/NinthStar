@@ -55,7 +55,7 @@ export const MainPage = React.createClass({
                         <Ripple/>
                     </div>
                 </Dialog>
-                <Button style={{width: 100, height: 100}}/>
+                <Button>Click Me</Button>
                 <Card style={{width: 400}}>
                     <CardTitle>This is a card</CardTitle>
                     <CardImg>
