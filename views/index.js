@@ -7,6 +7,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, browserHistory} from 'react-router';
+import Normalize from 'normalize.css';
 
 import {MainPage} from './pages/MainPage';
 import {NotFoundPage} from './pages/NotFoundPage';
