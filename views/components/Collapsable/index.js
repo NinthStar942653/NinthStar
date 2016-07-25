@@ -11,7 +11,7 @@ import classNames from '../../public/classNames';
 import material from '../../public/material/material.scss';
 import style from './style';
 
-const Collapsable = React.createClass({
+export const Collapsable = React.createClass({
     getInitialState() {
         return {
             active: []
@@ -54,8 +54,6 @@ const Collapsable = React.createClass({
         
         // Set classNames
         const COLLAPSABLE_CLASS = classNames([CLASSNAME, material.shadow1]);
-        
-        let active_index = null;
         
         return (
             <div className={COLLAPSABLE_CLASS} {...PROPS}>
@@ -128,7 +126,7 @@ const CollapsableTrigger = React.createClass({
     }
 });
 
-const CollapsablePanel = React.createClass({
+export const CollapsablePanel = React.createClass({
     getInitialState() {
         return {
             height: 0
@@ -150,9 +148,3 @@ const CollapsablePanel = React.createClass({
         );
     }
 });
-
-export default Collapsable;
-export {
-    Collapsable,
-    CollapsablePanel
-};

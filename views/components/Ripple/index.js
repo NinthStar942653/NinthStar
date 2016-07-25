@@ -11,7 +11,7 @@ import classNames from '../../public/classNames';
 import material from '../../public/material/material.scss';
 import style from './style';
 
-const Ripple = React.createClass({
+export const Ripple = React.createClass({
     getInitialState() {
         return {
             counter: 0,
@@ -104,8 +104,3 @@ const RippleEffect = React.createClass({
         );
     }
 });
-
-export default Ripple;
-export {
-    Ripple
-};
