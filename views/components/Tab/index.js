@@ -11,7 +11,7 @@ import classNames from '../../public/classNames';
 import material from '../../public/material/material.scss';
 import style from './style';
 
-const Tab = React.createClass({
+export const Tab = React.createClass({
     getInitialState() {
         return {
             active_index: null
@@ -111,7 +111,7 @@ const TabSelector = React.createClass({
     }
 });
 
-const TabPanel = React.createClass({
+export const TabPanel = React.createClass({
     render() {
         // Get props
         const {className: CLASSNAME, ofs: OFS, style: STYLE, active, ...PROPS} = this.props;
@@ -124,9 +124,3 @@ const TabPanel = React.createClass({
         );
     }
 });
-
-export default Tab;
-export {
-    Tab,
-    TabPanel
-};

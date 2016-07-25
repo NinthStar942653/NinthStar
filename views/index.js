@@ -8,8 +8,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, browserHistory} from 'react-router';
 
-import MainPage from './pages/MainPage';
-import NotFoundPage from './pages/NotFoundPage';
+import {MainPage} from './pages/MainPage';
+import {NotFoundPage} from './pages/NotFoundPage';
 
 const PageRouter = (
     <Router history={browserHistory}>

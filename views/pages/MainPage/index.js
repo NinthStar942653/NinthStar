@@ -15,7 +15,7 @@ import {Card, CardTitle, CardImg, CardItem} from '../../components/Card';
 
 import Img_1 from '../../img/1.jpg';
 
-const MainPage = React.createClass({
+export const MainPage = React.createClass({
     render() {
         return (
             <div>
@@ -51,7 +51,7 @@ const MainPage = React.createClass({
                     </CollapsablePanel>
                 </Collapsable>
                 <Dialog visible={true}>
-                    <div style={{width: 100, height: 100, backgroundColor: "#00F"}}>
+                    <div style={{position: 'relative', width: 100, height: 100, backgroundColor: "#00F"}}>
                         <Ripple/>
                     </div>
                 </Dialog>
@@ -71,5 +71,3 @@ const MainPage = React.createClass({
         );
     }
 });
-
-export default MainPage;

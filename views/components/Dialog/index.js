@@ -10,7 +10,7 @@ import classNames from '../../public/classNames';
 import material from '../../public/material/material.scss';
 import style from './style';
 
-const Dialog = React.createClass({
+export const Dialog = React.createClass({
     render() {
         const {className: CLASSNAME, style: STYLE, visible: VISIBLE, ...PROPS} = this.props;
         const PANEL_CLASS = classNames([CLASSNAME, style.panel, material.shadow3, material.animate]);
@@ -25,8 +25,3 @@ const Dialog = React.createClass({
         );
     }
 });
-
-export default Dialog;
-export {
-    Dialog
-};

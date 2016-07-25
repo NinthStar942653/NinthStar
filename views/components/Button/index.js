@@ -10,7 +10,7 @@ import classNames from '../../public/classNames';
 import material from '../../public/material/material.scss';
 import style from './style';
 
-import Ripple from '../Ripple';
+import {Ripple} from '../Ripple';
 
 export const Button = React.createClass({
 	render() {
