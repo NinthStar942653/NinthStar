@@ -1,7 +1,3 @@
-/*
- * Component: Card
- * Create:    2016-07-25
- */
 'use strict';
 
 import React from 'react';
@@ -14,6 +10,7 @@ import {Ripple} from '../../components/Ripple';
 
 export const Card = React.createClass({
 	render() {
+		// Get props
 		const {className: CLASSNAME, ...PROPS} = this.props;
 		const CARD_CLASS = classNames([CLASSNAME, style.card, material.shadow1]);
 		
@@ -25,6 +22,7 @@ export const Card = React.createClass({
 
 export const CardTitle = React.createClass({
 	render() {
+		// Get props
 		const {className: CLASSNAME, ...PROPS} = this.props;
 		const TITLE_CLASS = classNames([CLASSNAME, style.title]);
 		
@@ -36,6 +34,7 @@ export const CardTitle = React.createClass({
 
 export const CardImg = React.createClass({
 	render() {
+		// Get props
 		const {className: CLASSNAME, children: CHILDREN, ...PROPS} = this.props;
 		const IMG_CLASS = classNames([CLASSNAME, style.img]);
 		
@@ -56,6 +55,7 @@ export const CardImg = React.createClass({
 
 export const CardItem = React.createClass({
 	render() {
+		// Get props
 		const {className: CLASSNAME, ...PROPS} = this.props;
 		const ITEM_CLASS = classNames([CLASSNAME, style.item]);
 		

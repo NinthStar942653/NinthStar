@@ -1,7 +1,3 @@
-/*
- * Component: Collapsable
- * Create:    2016-07-18
- */
 'use strict';
 
 import React from 'react';
@@ -14,28 +10,36 @@ import style from './style';
 export const Collapsable = React.createClass({
     getInitialState() {
         return {
+            // Panel active state array
             active: []
         };
     },
     componentDidMount() {
         // Get props
-        const {children: CHILDREN, accordion: ACCORDION, ...PROPS} = this.props;
-            
+        const {children: CHILDREN, accordion: ACCORDION} = this.props;
+        
+        // Variables
         let active_index = null;
         let active = [];
         
         React.Children.map(CHILDREN, (item, index) => {
-            const {active: ACTIVE, ...PORPS} = item.props;
+            const ACTIVE = item.props.active;
             
+            // No active
             if (ACTIVE === undefined) {
                 active[index] = false;
+            // Active
             } else {
+                // Normal type collapsable
                 if (ACCORDION === undefined) {
                     active[index] = true;
+                // Accortion type collapsable
                 } else {
+                    // No active panel yet
                     if (active_index === null) {
                         active_index = index;
                         active[index] = true;
+                    // Active panel already
                     } else {
                         active[index] = false;
                         console.warn('[Collapsable] More than one active panel in accordion type. Only the first one will be set active.');
@@ -51,14 +55,13 @@ export const Collapsable = React.createClass({
     render() {
         // Get props
         const {className: CLASSNAME, children: CHILDREN, accordion, ...PROPS} = this.props;
-        
-        // Set classNames
         const COLLAPSABLE_CLASS = classNames([CLASSNAME, material.shadow1]);
         
         return (
             <div className={COLLAPSABLE_CLASS} {...PROPS}>
                 {
                     React.Children.map(CHILDREN, (item, index) => {
+                        // Get props
                         const {active, ...PROPS} = item.props;
                         
                         return (
@@ -70,11 +73,16 @@ export const Collapsable = React.createClass({
         );
     },
     collapsableTrigger(index) {
+        // Get props
         const ACCORDION = this.props.accordion;
+        
+        // Get state
         let active = this.state.active;
         
+        // Normal type collapsable
         if (ACCORDION === undefined) {
             active[index] = !active[index];
+        // Accordion type collapsable
         } else {
             for (let i = 0, l = active.length; i < l; ++i) {
                 active[i] = i === index ? !active[index] : false;
@@ -91,8 +99,6 @@ const CollapsableItem = React.createClass({
     render() {
         // Get props
         const {className: CLASSNAME, name: NAME, index: INDEX, collapsableTrigger: COLLAPSABLE_TRIGGER, ...PROPS} = this.props;
-        
-        // Set classNames
         const ITEM_CLASS = classNames([CLASSNAME, style.item]);
         
         return (
@@ -113,7 +119,7 @@ const CollapsableTrigger = React.createClass({
         this.props.collapsableTrigger(this.props.index);
     },
     render() {
-        // Set classNames
+        // Get props
         const TRIGGER_CLASS = classNames([material.shadow1, style.trigger]);
         
         return (
@@ -129,6 +135,7 @@ const CollapsableTrigger = React.createClass({
 export const CollapsablePanel = React.createClass({
     getInitialState() {
         return {
+            // Display height
             height: 0
         };
     },
@@ -138,13 +145,16 @@ export const CollapsablePanel = React.createClass({
         });
     },
     render() {
+        // Get props
         const {className: CLASSNAME, style: STYLE, active, ...PROPS} = this.props;
-        
-        // Set classNames
         const PANEL_CLASS = classNames([style.panel]);
+        const PANEL_STYLE = {
+            height: this.state.height === 0 ? 'auto' : this.props.active ? this.state.height : 0,
+            ...STYLE
+        }
         
         return (
-            <div className={PANEL_CLASS} style={{height: this.state.height === 0 ? 'auto' : this.props.active ? this.state.height : 0, ...STYLE}} {...PROPS}/>
+            <div className={PANEL_CLASS} style={PANEL_STYLE} {...PROPS}/>
         );
     }
 });
