@@ -6,8 +6,6 @@ import {classNames} from '../../public/classNames';
 import material from '../../public/material/material.scss';
 import style from './style';
 
-import {Ripple} from '../../components/Ripple';
-
 export const Card = React.createClass({
 	render() {
 		// Get props
@@ -47,7 +45,6 @@ export const CardImg = React.createClass({
 						);
 					})
 				}
-				<Ripple/>
 			</div>
 		);
 	}

@@ -1,7 +1,21 @@
+@import "../../public/material/material.scss";
+
 .item {
     overflow: hidden;
     background-color: #EEE;
     
-    .trigger { background-color: #FFF; border-top: 1px solid #DDD; cursor: pointer; }
-    .panel { overflow: hidden; border-top: 1px solid #DDD; transition-duration: 0.5s; }
+    .trigger {
+        padding: 0.5rem 1rem;
+        background-color: #FFF;
+        border-top: 1px solid #DDD;
+        cursor: pointer;
+    }
+    .panel {
+	    @extend %animation;
+	    @extend %animation-speed-normal;
+        
+        overflow: hidden;
+        padding: 0 1rem;
+        border-top: 1px solid #DDD;
+    }
 }
