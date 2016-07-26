@@ -51,12 +51,13 @@ export const MainPage = React.createClass({
                         <Ripple/>
                     </div>
                 </Dialog>
-                <Button>Click Me</Button>
+                <Button type='flat' rippleColor='blue'>Click Me</Button>
                 <Card style={{width: 400}}>
                     <CardTitle>This is a card</CardTitle>
                     <CardImg>
                         <img src={Img_1}/>
                         <CardTitle>Title</CardTitle>
+                        <Ripple color='blue'/>
                     </CardImg>
                     <CardItem>
                         <p>This is a text in card item</p>

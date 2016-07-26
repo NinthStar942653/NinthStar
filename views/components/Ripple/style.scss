@@ -1,3 +1,5 @@
+@import "../../public/material/material.scss";
+
 .ripple {
     position: absolute;
     top: 0;
@@ -7,11 +9,17 @@
     overflow: hidden;
     
     .rippleEffect {
+	    @extend %animation;
+	    @extend %animation-speed-slow;
+	    
         position: absolute;
         width: 2px;
         height: 2px;
         background-color: #FFF;
         border-radius: 100%;
-        transition-duration: 0.8s;
+        
+        &.blue {
+            @extend .colorBlue;
+        }
     }
 }

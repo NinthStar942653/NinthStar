@@ -18,14 +18,20 @@ export const Ripple = React.createClass({
     },
     render() {
         // Get props
+        const COLOR = this.props.color;
         const RIPPLE_CLASS = classNames([style.ripple]);
+        
+        // Unknown color
+        if (COLOR !== undefined && style[COLOR] === undefined) {
+            console.warn('[Ripple] Unknown color "' + COLOR + '". Regard as not set(default white).');
+        }
         
         return (
             <div className={RIPPLE_CLASS} onMouseDown={this.rippleShow}>
                 {
                     this.state.effectsProps.map((effectProps, index) => {
                         return (
-                            <RippleEffect key={effectProps.key} effectProps={effectProps} rippleHide={this.rippleHide}/>
+                            <RippleEffect className={style[COLOR]} key={effectProps.key} effectProps={effectProps} rippleHide={this.rippleHide}/>
                         );
                     })
                 }
@@ -106,7 +112,8 @@ const RippleEffect = React.createClass({
     },
     render() {
         // Get props
-        const RIPPLE_EFFECT_CLASS = classNames([style.rippleEffect, material.animate]);
+        const CLASSNAME = this.props.className;
+        const RIPPLE_EFFECT_CLASS = classNames([CLASSNAME, style.rippleEffect, material.animate]);
         const RIPPLE_EFFECT_STYLE = {
             // Set visibility acoording to this.props.effectProps and this.state
             top: this.props.effectProps.y,

@@ -44,7 +44,7 @@ export const Tab = React.createClass({
         // Get props
         const {className: CLASSNAME, children: CHILDREN, ...PROPS} = this.props;
         const TAB_CLASS = classNames([CLASSNAME, style.tab]);
-        const SELECTOR_CLASS = classNames([style.selectors, material.row, material.shadow1, ]);
+        const SELECTOR_CLASS = classNames([style.selectors, material.row, material.shadow1]);
         const SELECTOR_STYLE = {
             width: 100 / CHILDREN.length + '%'
         };
