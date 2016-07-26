@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import classNames from '../../public/classNames';
+import {classNames} from '../../public/classNames';
 
 import material from '../../public/material/material.scss';
 import style from './style';

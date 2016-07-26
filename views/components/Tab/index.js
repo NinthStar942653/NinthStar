@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import classNames from '../../public/classNames';
+import {classNames} from '../../public/classNames';
 
 import material from '../../public/material/material.scss';
 import style from './style';
@@ -9,12 +9,13 @@ import style from './style';
 export const Tab = React.createClass({
     getInitialState() {
         return {
+            // Current active panel index
             active_index: null
         };
     },
     componentWillMount() {
         // Get props
-        const {active: ACTIVE, children: CHILDREN} = this.props.active;
+        const {active: ACTIVE, children: CHILDREN} = this.props;
         
         // Set initial active_index
         let active_index = null;
