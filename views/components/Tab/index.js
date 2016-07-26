@@ -1,8 +1,3 @@
-/*
- * Component: Tab
- * Create:    2016-07-15
- */
-
 'use strict';
 
 import React from 'react';
@@ -18,32 +13,35 @@ export const Tab = React.createClass({
         };
     },
     componentWillMount() {
-        // Set initial active_index
-        {
-            let active_index = null;
-            
-            React.Children.map(this.props.children, (panel, index) => {
-                if (panel.props.active) {
-                    if (active_index === null) {
-                        active_index = index;
-                    } else {
-                        console.warn('[Tab] More than one active panel. Only the first one will be set active.');
-                    }
-                }
-            });
-            
-            if (active_index === null) {
-                active_index = 0;
-            }
+        // Get props
+        const {active: ACTIVE, children: CHILDREN} = this.props.active;
         
-            this.state.active_index = active_index;
+        // Set initial active_index
+        let active_index = null;
+        
+        React.Children.map(CHILDREN, (panel, index) => {
+            // Active
+            if (ACTIVE) {
+                // No active panel yet
+                if (active_index === null) {
+                    active_index = index;
+                // Active panel already
+                } else {
+                    console.warn('[Tab] More than one active panel. Only the first one will be set active.');
+                }
+            }
+        });
+        
+        // No active panel at all
+        if (active_index === null) {
+            active_index = 0;
         }
+        
+        this.state.active_index = active_index;
     },
     render() {
         // Get props
         const {className: CLASSNAME, children: CHILDREN, ...PROPS} = this.props;
-        
-        // Set classNames
         const TAB_CLASS = classNames([CLASSNAME, style.tab]);
         const SELECTOR_CLASS = classNames([style.selectors, material.row, material.shadow1, ]);
         const SELECTOR_STYLE = {
@@ -75,11 +73,11 @@ export const Tab = React.createClass({
                 <div className={PANELS_CLASS}>
                     {
                         React.Children.map(CHILDREN, (panel, index) => {
+                            // Get props
                             const {name, ...PROPS} = panel.props;
                             
                             return (
                                 <TabPanel ofs={index === 0 ? -100 * this.state.active_index + '%' : 0} {...PROPS}/>
-
                             );
                         })
                     }
@@ -101,8 +99,6 @@ const TabSelector = React.createClass({
     render() {
         // Get props
         const {className: CLASSNAME, index, tabSelect, ...PROPS} = this.props;
-        
-        // Set classNames
         const SelectorClass = classNames([CLASSNAME, style.selector, material.col]);
         
         return (
@@ -115,8 +111,6 @@ export const TabPanel = React.createClass({
     render() {
         // Get props
         const {className: CLASSNAME, ofs: OFS, style: STYLE, active, ...PROPS} = this.props;
-        
-        // Set classNames
         const PANEL_CLASS = classNames([CLASSNAME, style.panel]);
         
         return (

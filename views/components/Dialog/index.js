@@ -12,9 +12,11 @@ import style from './style';
 
 export const Dialog = React.createClass({
     render() {
+        // Get props
         const {className: CLASSNAME, style: STYLE, visible: VISIBLE, ...PROPS} = this.props;
         const PANEL_CLASS = classNames([CLASSNAME, style.panel, material.shadow3, material.animate]);
         const PANEL_STYLE = {
+            // Set visibility according to this.props.visible
             top: VISIBLE ? '30%' : '-10%',
             opacity: VISIBLE ? 1 : 0,
             ...PANEL_STYLE

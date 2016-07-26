@@ -1,7 +1,3 @@
-/*
- * Component: Ripple
- * Create:    2016-07-20
- */
 'use strict';
 
 import React from 'react';
@@ -14,11 +10,14 @@ import style from './style';
 export const Ripple = React.createClass({
     getInitialState() {
         return {
+            // ID counter
             counter: 0,
+            // Effects array
             effectsProps: []
         };
     },
     render() {
+        // Get props
         const RIPPLE_CLASS = classNames([style.ripple]);
         
         return (
@@ -34,9 +33,13 @@ export const Ripple = React.createClass({
         );
     },
     rippleShow(evt) {
+        // Get DOM node
         const RIPPLE = ReactDOM.findDOMNode(this);
+        
+        // Get effects array
         let effectsProps = this.state.effectsProps;
         
+        // Add new effect
         effectsProps.push({
             key: this.state.counter,
             x: evt.pageX - RIPPLE.getBoundingClientRect().left,
@@ -44,17 +47,22 @@ export const Ripple = React.createClass({
             scale: Math.sqrt(RIPPLE.offsetWidth * RIPPLE.offsetWidth + RIPPLE.offsetHeight * RIPPLE.offsetHeight)
         });
         
+        // Rerender
         this.setState({
             counter: this.state.counter + 1,
             effectsProps: effectsProps
         });
     },
     rippleHide(key) {
+        // Get this
         const RIPPLE = this;
         
+        // Wait
         setTimeout(function() {
+            // Get effects array
             let effectsProps = RIPPLE.state.effectsProps;
             
+            // Remove outdated effects
             while (effectsProps.length > 0 && effectsProps[0].key <= key) {
                 effectsProps.shift();
             }
@@ -69,30 +77,38 @@ export const Ripple = React.createClass({
 const RippleEffect = React.createClass({
     getInitialState() {
         return {
+            // Effect showing
             show: false,
+            // Effect hiding
             hide: false
         };
     },
     componentDidMount() {
+        // Get this
         const RIPPLE_EFFECT = this;
         
+        // Wait
         setTimeout(function() {
             RIPPLE_EFFECT.setState({
                 show: true
             });
             
+            // Wait
             setTimeout(function() {
                 RIPPLE_EFFECT.setState({
                     hide: true
                 });
                 
+                // Hide effect
                 RIPPLE_EFFECT.props.rippleHide(RIPPLE_EFFECT.props.effectProps.key);
             }, 500);
         }, 1);
     },
     render() {
+        // Get props
         const RIPPLE_EFFECT_CLASS = classNames([style.rippleEffect, material.animate]);
         const RIPPLE_EFFECT_STYLE = {
+            // Set visibility acoording to this.props.effectProps and this.state
             top: this.props.effectProps.y,
             left: this.props.effectProps.x,
             transform: this.state.show ? 'scale(' + this.props.effectProps.scale + ')' : '',
