@@ -21,6 +21,7 @@ export const Slider = React.createClass({
 		});
 	},
 	render() {
+		// Get props
 		const {className: CLASSNAME, min: MIN, max: MAX, step, value, type, ...PROPS} = this.props;
 		const SLIDER_CLASS = classNames([CLASSNAME, style.slider]);
 		
@@ -52,16 +53,26 @@ export const Slider = React.createClass({
 		);
 	},
 	setValue(value) {
-		const STEP = this.props.step;
+		// Get props
+		const {min: MIN, max: MAX, step: STEP} = this.props;
 		
-		this.setState({
-			value: Math.round(value / STEP) * STEP
-		});
+		// Check value range
+		if (MIN <= value && value <= MAX) {
+			this.setState({
+				value: Math.round(value / STEP) * STEP
+			});
+		}
 	}
 });
 
 export const SliderBar = React.createClass({
+	getInitialState() {
+		return {
+			drag: false
+		};
+	},
 	handleClick(evt) {
+		// Get props
 		const {min: MIN, max: MAX} = this.props;
 		const BAR = ReactDOM.findDOMNode(this);
 		const X = evt.pageX - BAR.getBoundingClientRect().left;
@@ -69,6 +80,33 @@ export const SliderBar = React.createClass({
 		const VALUE = X * (MAX - MIN) / LENGTH + MIN;
 		
 		this.props.setValue(VALUE);
+	},
+	handleMouseDown(evt) {
+		this.setState({
+			drag: true
+		});
+	},
+	handleMouseMove(evt) {
+		if (this.state.drag) {
+			// Get props
+			const {min: MIN, max: MAX} = this.props;
+			const BAR = ReactDOM.findDOMNode(this);
+			const X = evt.pageX - BAR.getBoundingClientRect().left;
+			const LENGTH = BAR.offsetWidth;
+			const VALUE = X * (MAX - MIN) / LENGTH + MIN;
+			
+			this.props.setValue(VALUE);
+		}
+	},
+	handleMouseUp() {
+		this.setState({
+			drag: false
+		});
+	},
+	handleMouseLeave() {
+		this.setState({
+			drag: false
+		});
 	},
 	render() {
 		const {className: CLASSNAME, min: MIN, max: MAX, value: VALUE, type, setValue, ...PROPS} = this.props;
@@ -79,7 +117,13 @@ export const SliderBar = React.createClass({
 		};
 		
 		return (
-			<div className={BAR_CLASSNAME} onMouseDown={this.handleClick} {...PROPS}>
+			<div className={BAR_CLASSNAME}
+				onClick={this.handleClick}
+				onMouseDown={this.handleMouseDown}
+				onMouseMove={this.handleMouseMove}
+				onMouseUp={this.handleMouseUp}
+				onMouseLeave={this.handleMouseLeave}
+				{...PROPS}>
 				<div className={BAR_DISPLAY_CLASSNAME}/>
 				<SliderController style={CONTROLLER_STYLE}/>
 			</div>
@@ -89,6 +133,7 @@ export const SliderBar = React.createClass({
 
 const SliderController = React.createClass({
 	render() {
+		// Get props
 		const STYLE = this.props.style;
 		const CONTROLLER_OUTER_CLASS = classNames([style.outer]);
 		const CONTROLLER_INNER_CLASS = classNames([style.inner]);
@@ -103,7 +148,9 @@ const SliderController = React.createClass({
 
 export const SliderInput = React.createClass({
 	render() {
+		// Get props
 		const INPUT_CLASS = classNames([style.input]);
+		
 		return (
 			<div className={INPUT_CLASS}>{this.props.value}</div>
 		);
