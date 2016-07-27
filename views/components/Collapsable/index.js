@@ -59,16 +59,24 @@ export const Collapsable = React.createClass({
 		
 		return (
 			<div className={COLLAPSABLE_CLASS} {...PROPS}>
-				{
-					React.Children.map(CHILDREN, (item, index) => {
+			{
+				React.Children.map(CHILDREN, (item, index) => {
+					// Check type
+					const TYPE = typeof(item.type) === 'string' ? item.type : item.type.displayName;
+					
+					switch (TYPE) {
+					case 'CollapsablePanel':
 						// Get props
 						const {active, ...PROPS} = item.props;
 						
 						return (
 							<CollapsableItem index={index} active={this.state.active[index]} collapsableTrigger={this.collapsableTrigger} {...PROPS}/>
 						);
-					})
-				}
+					default:
+						console.error('[Collapsable] Illegal subcomponent "' + TYPE + '"');
+					}
+				})
+			}
 			</div>
 		);
 	},
@@ -104,9 +112,9 @@ const CollapsableItem = React.createClass({
 		return (
 			<div className={ITEM_CLASS}>
 				<CollapsableTrigger index={INDEX} collapsableTrigger={COLLAPSABLE_TRIGGER}>
-					{
-						NAME
-					}
+				{
+					NAME
+				}
 				</CollapsableTrigger>
 				<CollapsablePanel {...PROPS}/>
 			</div>
@@ -124,9 +132,9 @@ const CollapsableTrigger = React.createClass({
 		
 		return (
 			<div className={TRIGGER_CLASS} onClick={this.handleClick}>
-				{
-					this.props.children
-				}
+			{
+				this.props.children
+			}
 			</div>
 		);
 	}

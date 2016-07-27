@@ -58,30 +58,45 @@ export const Tab = React.createClass({
 		return (
 			<div className={TAB_CLASS} {...PROPS}>
 				<div className={SELECTOR_CLASS}>
-					{
-						React.Children.map(CHILDREN, (panel, index) => {
+				{
+					React.Children.map(CHILDREN, (panel, index) => {
+						// Check type
+						const TYPE = typeof(panel.type) === 'string' ? panel.type : panel.type.displayName;
+						
+						switch (TYPE) {
+						case 'TabPanel':
 							return (
 								<TabSelector style={SELECTOR_STYLE} index={index} tabSelect={this.tabSelect}>
-									{
-										panel.props.name
-									}
+								{
+									panel.props.name
+								}
 								</TabSelector>
 							);
-						})
-					}
+						default:
+							console.error('[Tab] Illegal subcomponent "' + TYPE + '".');
+						}
+					})
+				}
 				</div>
 				<div className={INDICATOR_CLASS} style={INDICATOR_STYLE}/>
 				<div className={PANELS_CLASS}>
-					{
-						React.Children.map(CHILDREN, (panel, index) => {
+				{
+					React.Children.map(CHILDREN, (panel, index) => {
+						// Check type
+						const TYPE = typeof(panel.type) === 'string' ? panel.type : panel.type.displayName;
+						
+						switch (TYPE) {
+						case 'TabPanel':
 							// Get props
 							const {name, ...PROPS} = panel.props;
 							
 							return (
 								<TabPanel ofs={index === 0 ? -100 * this.state.active_index + '%' : 0} {...PROPS}/>
 							);
-						})
-					}
+						default:
+						}
+					})
+				}
 				</div>
 			</div>
 		);
