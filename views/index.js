@@ -10,10 +10,10 @@ import {MainPage} from './pages/MainPage';
 import {NotFoundPage} from './pages/NotFoundPage';
 
 const PageRouter = (
-    <Router history={browserHistory}>
-        <Route path="/" component={MainPage} />
-        <Route path="*" component={NotFoundPage} />
-    </Router>
+	<Router history={browserHistory}>
+		<Route path="/" component={MainPage} />
+		<Route path="*" component={NotFoundPage} />
+	</Router>
 );
 
 // React Start!
