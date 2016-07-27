@@ -7,6 +7,8 @@ import {classNames} from '../../public/classNames';
 import material from '../../public/material/material.scss';
 import style from './style';
 
+import {Input} from '../Input';
+
 export const Slider = React.createClass({
 	getInitialState() {
 		return {
@@ -42,7 +44,7 @@ export const Slider = React.createClass({
 						);
 					case 'SliderInput':
 						return (
-							<SliderInput min={MIN} max={MAX} value={this.state.value} {...PROPS}/>
+							<SliderInput min={MIN} max={MAX} value={this.state.value} setValue={this.setValue} {...PROPS}/>
 						);
 					default:
 						console.warn('[Slider] Illegal subcomponent "' + TYPE + '".');
@@ -57,11 +59,9 @@ export const Slider = React.createClass({
 		const {min: MIN, max: MAX, step: STEP} = this.props;
 		
 		// Check value range
-		if (MIN <= value && value <= MAX) {
-			this.setState({
-				value: Math.round(value / STEP) * STEP
-			});
-		}
+		this.setState({
+			value: value < MIN ? MIN : value > MAX ? MAX : Math.round(value / STEP) * STEP
+		});
 	}
 });
 
@@ -149,10 +149,11 @@ const SliderController = React.createClass({
 export const SliderInput = React.createClass({
 	render() {
 		// Get props
-		const INPUT_CLASS = classNames([style.input]);
+		const {className: CLASSNAME, setValue: SET_VALUE} = this.props;
+		const INPUT_CLASS = classNames([CLASSNAME, style.input]);
 		
 		return (
-			<div className={INPUT_CLASS}>{this.props.value}</div>
+			<Input className={INPUT_CLASS} value={this.props.value} setValue={SET_VALUE}/>
 		);
 	}
 });
