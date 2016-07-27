@@ -51,7 +51,7 @@ export const MainPage = React.createClass({
 					<div style={{position: 'relative', width: 100, height: 100, backgroundColor: "#00F"}}>
 						<Ripple/>
 					</div>
-					<Slider min={0} max={100} value={10}>
+					<Slider min={0} max={100} step={1} value={10}>
 						<SliderBar/>
 						<SliderInput/>
 					</Slider>
