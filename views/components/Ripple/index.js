@@ -28,13 +28,13 @@ export const Ripple = React.createClass({
 		
 		return (
 			<div className={RIPPLE_CLASS} onMouseDown={this.rippleShow}>
-				{
-					this.state.effectsProps.map((effectProps, index) => {
-						return (
-							<RippleEffect className={style[COLOR]} key={effectProps.key} effectProps={effectProps} rippleHide={this.rippleHide}/>
-						);
-					})
-				}
+			{
+				this.state.effectsProps.map((effectProps, index) => {
+					return (
+						<RippleEffect className={style[COLOR]} key={effectProps.key} effectProps={effectProps} rippleHide={this.rippleHide}/>
+					);
+				})
+			}
 			</div>
 		);
 	},

@@ -38,13 +38,13 @@ export const CardImg = React.createClass({
 		
 		return (
 			<div className={IMG_CLASS} {...PROPS}>
-				{
-					React.Children.map(CHILDREN, item => {
-						return (
-							item
-						);
-					})
-				}
+			{
+				React.Children.map(CHILDREN, item => {
+					return (
+						item
+					);
+				})
+			}
 			</div>
 		);
 	}

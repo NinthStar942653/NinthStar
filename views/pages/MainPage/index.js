@@ -8,6 +8,7 @@ import {Ripple} from '../../components/Ripple';
 import {Dialog} from '../../components/Dialog';
 import {Button} from '../../components/Button';
 import {Card, CardTitle, CardImg, CardItem} from '../../components/Card';
+import {Slider, SliderBar, SliderInput} from '../../components/Slider';
 
 import Img_1 from '../../img/1.jpg';
 
@@ -50,6 +51,10 @@ export const MainPage = React.createClass({
 					<div style={{position: 'relative', width: 100, height: 100, backgroundColor: "#00F"}}>
 						<Ripple/>
 					</div>
+					<Slider min={0} max={100} value={10}>
+						<SliderBar/>
+						<SliderInput/>
+					</Slider>
 				</Dialog>
 				<Button type='flat' rippleColor='blue'>Click Me</Button>
 				<Card style={{width: 400}}>
