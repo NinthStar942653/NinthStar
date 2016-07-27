@@ -1,7 +1,7 @@
 %animation { transition-timing-function: cubic-bezier(0.24, 0.48, 0.48, 0.96); }
 
-%animation-speed-normal { transition-duration: 0.5s ; }
-%animation-speed-slow   { transition-duration: 0.75s; }
+%animation-speed-normal  { transition-duration: 0.5s ; }
+%animation-speed-slow    { transition-duration: 0.75s; }
 
 .row:after { content: ""; display: block; clear: both; }
 	.col { float: left; }
