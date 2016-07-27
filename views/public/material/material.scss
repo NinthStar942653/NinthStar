@@ -2,6 +2,7 @@
 
 %animation { transition-timing-function: cubic-bezier(0.24, 0.48, 0.48, 0.96); }
 
+%animation-speed-fast    { transition-duration: 0.25s; }
 %animation-speed-normal  { transition-duration: 0.5s ; }
 %animation-speed-slow    { transition-duration: 0.75s; }
 
@@ -86,40 +87,72 @@
 	.col.grid-ofs-l12 { margin-left: 100%; }
 }
 
-.colorBlue { background-color: #2196F3; }
-	.colorBlue.lighten1 { background-color: #42A5F5; }
-	.colorBlue.lighten2 { background-color: #64B5F6; }
-	.colorBlue.lighten3 { background-color: #90CAF9; }
-	.colorBlue.lighten4 { background-color: #BBDEFB; }
-	.colorBlue.darken1  { background-color: #1E88E5; }
-	.colorBlue.darken2  { background-color: #1976D2; }
-	.colorBlue.darken3  { background-color: #1565C0; }
-	.colorBlue.darken4  { background-color: #0D47A1; }
+$color-white: #F0F0F0;
+$color-lightgrey: #D7D7D7;
+$color-grey: #606060;
+$color-darkgrey: #4F4F4F;
+$color-black: #212121;
+$color-red: #FF9800;
+$color-orange: #E51C23;
+$color-blue: #2196F3;
+
+$color-main: $color-blue;
+$color-main-lighten1: lighten($color-main,  5%);
+$color-main-lighten2: lighten($color-main, 10%);
+$color-main-lighten3: lighten($color-main, 15%);
+$color-main-lighten4: lighten($color-main, 20%);
+$color-main-lighten5: lighten($color-main, 25%);
+$color-main-darken1: darken($color-main,  5%);
+$color-main-darken2: darken($color-main, 10%);
+$color-main-darken3: darken($color-main, 15%);
+$color-main-darken4: darken($color-main, 20%);
+$color-main-darken5: darken($color-main, 25%);
+
+$color-warning: $color-orange;
+$color-error: $color-red;
+$color-disable: $color-grey;
+$color-enable: $color-darkgrey;
+
+$color-font: $color-black;
+$color-background: $color-white;
+$color-border: $color-lightgrey;
+$color-shadow: $color-black;
+
+.colorMain { background-color: $color-main; }
+	.colorMainLighten1 { background-color: $color-main-lighten1; }
+	.colorMainLighten2 { background-color: $color-main-lighten2; }
+	.colorMainLighten3 { background-color: $color-main-lighten3; }
+	.colorMainLighten4 { background-color: $color-main-lighten4; }
+	.colorMainDarken1 { background-color: $color-main-darken1; }
+	.colorMainDarken2 { background-color: $color-main-darken2; }
+	.colorMainDarken3 { background-color: $color-main-darken3; }
+	.colorMainDarken4 { background-color: $color-main-darken4; }
 
 .shadow0 { box-shadow: none; }
-.shadow1 { box-shadow: 0  2px  5px 0 rgba(0, 0, 0, 0.16), 0  4px 10px 0 rgba(0, 0, 0, 0.12); }
-.shadow2 { box-shadow: 0  7px 10px 0 rgba(0, 0, 0, 0.18), 0  9px 20px 0 rgba(0, 0, 0, 0.16); }
-.shadow3 { box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.20), 0 16px 32px 0 rgba(0, 0, 0, 0.20); }
-.shadow4 { box-shadow: 0 17px 20px 0 rgba(0, 0, 0, 0.20), 0 25px 48px 0 rgba(0, 0, 0, 0.20); }
+.shadow1 { box-shadow: 0  2px  5px 0 rgba($color-black, 0.16), 0  4px 10px 0 rgba($color-black, 0.12); }
+.shadow2 { box-shadow: 0  7px 10px 0 rgba($color-black, 0.18), 0  9px 20px 0 rgba($color-black, 0.16); }
+.shadow3 { box-shadow: 0 12px 15px 0 rgba($color-black, 0.2 ), 0 16px 32px 0 rgba($color-black, 0.2 ); }
+.shadow4 { box-shadow: 0 17px 20px 0 rgba($color-black, 0.21), 0 25px 48px 0 rgba($color-black, 0.22); }
+.shadow5 { box-shadow: 0 20px 25px 0 rgba($color-black, 0.21), 0 36px 64px 0 rgba($color-black, 0.23); }
 
 .interactHover {
 	@extend %animation;
 	@extend %animation-speed-normal;
 	
-	&.shadow0:hover { box-shadow: 0  2px  5px 0 rgba(0, 0, 0, 0.16), 0  4px 10px 0 rgba(0, 0, 0, 0.12); }
-	&.shadow1:hover { box-shadow: 0  7px 10px 0 rgba(0, 0, 0, 0.18), 0  9px 20px 0 rgba(0, 0, 0, 0.16); }
-	&.shadow2:hover { box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.2 ), 0 16px 32px 0 rgba(0, 0, 0, 0.2 ); }
-	&.shadow3:hover { box-shadow: 0 17px 20px 0 rgba(0, 0, 0, 0.22), 0 25px 48px 0 rgba(0, 0, 0, 0.24); }
-	&.shadow4:hover { box-shadow: 0 22px 25px 0 rgba(0, 0, 0, 0.24), 0 36px 72px 0 rgba(0, 0, 0, 0.28); }
-	&.colorBlue:hover          { background-color: #42A5F5; }
-	&.colorBlue.lighten1:hover { background-color: #64B5F6; }
-	&.colorBlue.lighten2:hover { background-color: #90CAF9; }
-	&.colorBlue.lighten3:hover { background-color: #BBDEFB; }
-	&.colorBlue.lighten4:hover { background-color: #E3F2FD; }
-	&.colorBlue.darken1:hover  { background-color: #2196F3; }
-	&.colorBlue.darken2:hover  { background-color: #1E88E5; }
-	&.colorBlue.darken3:hover  { background-color: #1976D2; }
-	&.colorBlue.darken4:hover  { background-color: #1565C0; }
+	&.shadow0:hover { @extend .shadow1; }
+	&.shadow1:hover { @extend .shadow2; }
+	&.shadow2:hover { @extend .shadow3; }
+	&.shadow3:hover { @extend .shadow4; }
+	&.shadow4:hover { @extend .shadow5; }
+	&.colorMain:hover          { background-color: $color-main-lighten1; }
+	&.colorMain.lighten1:hover { background-color: $color-main-lighten2; }
+	&.colorMain.lighten2:hover { background-color: $color-main-lighten3; }
+	&.colorMain.lighten3:hover { background-color: $color-main-lighten4; }
+	&.colorMain.lighten4:hover { background-color: $color-main-lighten5; }
+	&.colorMain.darken1:hover  { background-color: $color-main; }
+	&.colorMain.darken2:hover  { background-color: $color-main-darken1; }
+	&.colorMain.darken3:hover  { background-color: $color-main-darken2; }
+	&.colorMain.darken4:hover  { background-color: $color-main-darken3; }
 }
 
 .interactActive {

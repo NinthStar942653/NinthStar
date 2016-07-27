@@ -9,10 +9,10 @@
 			cursor: pointer;
 			
 			&.active {
-				background-color: #EEE;
+				background-color: $color-background;
 			}
 			&.disable {
-				color: #DDD;
+				color: $color-disable;
 				cursor: default;
 			}
 		}

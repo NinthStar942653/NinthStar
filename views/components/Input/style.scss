@@ -1,11 +1,16 @@
+@import "../../public/material/material.scss";
+
 .input {
+	@extend %animation;
+	@extend %animation-speed-fast;
+	
 	display: inline-block;
 	background-color: transparent;
 	border: none;
-	border-bottom: 1px solid #DDD;
+	border-bottom: 1px solid $color-border;
 	outline: none;
 	
 	&:focus {
-		border-bottom: 1px solid blue;
+		border-bottom: 1px solid $color-main;
 	}
 }
