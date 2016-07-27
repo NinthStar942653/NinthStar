@@ -1,0 +1,11 @@
+.input {
+	display: inline-block;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid #DDD;
+	outline: none;
+	
+	&:focus {
+		border-bottom: 1px solid blue;
+	}
+}

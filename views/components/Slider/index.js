@@ -40,11 +40,11 @@ export const Slider = React.createClass({
 					switch (TYPE) {
 					case 'SliderBar':
 						return (
-							<SliderBar min={MIN} max={MAX} value={this.state.value} setValue={this.setValue} {...PROPS}/>
+							<SliderBar min={MIN} max={MAX} value={this.state.value} setValue={this.setValue} {...sub.props}/>
 						);
 					case 'SliderInput':
 						return (
-							<SliderInput min={MIN} max={MAX} value={this.state.value} setValue={this.setValue} {...PROPS}/>
+							<SliderInput value={this.state.value} setValue={this.setValue} {...sub.props}/>
 						);
 					default:
 						console.warn('[Slider] Illegal subcomponent "' + TYPE + '".');
@@ -149,11 +149,11 @@ const SliderController = React.createClass({
 export const SliderInput = React.createClass({
 	render() {
 		// Get props
-		const {className: CLASSNAME, setValue: SET_VALUE} = this.props;
+		const {className: CLASSNAME, value: VALUE, setValue: SET_VALUE} = this.props;
 		const INPUT_CLASS = classNames([CLASSNAME, style.input]);
 		
 		return (
-			<Input className={INPUT_CLASS} value={this.props.value} setValue={SET_VALUE}/>
+			<Input className={INPUT_CLASS} value={VALUE} setValue={SET_VALUE}/>
 		);
 	}
 });

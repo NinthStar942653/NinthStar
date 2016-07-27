@@ -12,11 +12,11 @@ export const Input = React.createClass({
 	},
 	render() {
 		// Get props
-		const {className: CLASSNAME, value: VALUE, setValue} = this.props;
-		const INPUT_CLASS = classNames([CLASSNAME]);
+		const {className: CLASSNAME, value: VALUE, setValue, ...PROPS} = this.props;
+		const INPUT_CLASS = classNames([CLASSNAME, style.input]);
 		
 		return (
-			<input className={INPUT_CLASS} value={VALUE} onChange={this.handleChange}/>
+			<input className={INPUT_CLASS} value={VALUE} onChange={this.handleChange} {...PROPS}/>
 		);
 	}
 });
