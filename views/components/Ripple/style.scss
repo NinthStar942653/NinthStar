@@ -15,11 +15,11 @@
 		position: absolute;
 		width:  2px;
 		height: 2px;
-		background-color: #FFF;
+		background-color: $color-white;
 		border-radius: 100%;
 		
 		&.blue {
-			@extend .colorBlue;
+			background-color: $color-blue;
 		}
 	}
 }
