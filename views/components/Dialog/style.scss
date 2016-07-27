@@ -3,11 +3,11 @@
 .panel {
 	@extend %animation;
 	@extend %animation-speed-normal;
-    
-    position: absolute;
-    width: 40%;
-    left:  30%;
-    right: 30%;
-    z-index: 1000;
-    background-color: #FFF;
+	
+	position: absolute;
+	width: 40%;
+	left:  30%;
+	right: 30%;
+	z-index: 1000;
+	background-color: #FFF;
 }

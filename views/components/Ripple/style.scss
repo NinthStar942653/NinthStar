@@ -1,25 +1,25 @@
 @import "../../public/material/material.scss";
 
 .ripple {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    overflow: hidden;
-    
-    .rippleEffect {
-	    @extend %animation;
-	    @extend %animation-speed-slow;
-	    
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background-color: #FFF;
-        border-radius: 100%;
-        
-        &.blue {
-            @extend .colorBlue;
-        }
-    }
+	position: absolute;
+	top:    0;
+	right:  0;
+	bottom: 0;
+	left:   0;
+	overflow: hidden;
+	
+	.rippleEffect {
+		@extend %animation;
+		@extend %animation-speed-slow;
+		
+		position: absolute;
+		width:  2px;
+		height: 2px;
+		background-color: #FFF;
+		border-radius: 100%;
+		
+		&.blue {
+			@extend .colorBlue;
+		}
+	}
 }

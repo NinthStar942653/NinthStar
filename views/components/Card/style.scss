@@ -2,13 +2,21 @@
 	overflow: hidden;
 	border-radius: 0.25rem;
 	
-	.title { margin: 1rem; }
+	.title {
+		margin: 1rem;
+	}
 	.img {
 		position: relative;
 		width: 100%;
 		
-		img { width: 100%; }
-		.title { position: absolute; left: 0; bottom: 0; }
+		img {
+			width: 100%;
+		}
+		.title {
+			position: absolute;
+			left:   0;
+			bottom: 0;
+		}
 	}
 	.item { margin: 1rem; }
 }

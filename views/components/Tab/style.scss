@@ -1,43 +1,43 @@
 @import "../../public/material/material.scss";
 
 .tab {
-    .selectors {
-        padding: 0.5rem 0;
-        
-        .selector {
-            text-align: center;
-            cursor: pointer;
-            
-            &.active {
-                background-color: #EEE;
-            }
-            &.disable {
-                color: #DDD;
-                cursor: default;
-            }
-        }
-    }
-    .indicator {
-        @extend %animation;
-        @extend %animation-speed-normal;
-        
-        float: left;
-        height: 2px;
-        margin-top: -2px;
-    }
-    .panels {
-        padding: 0 1rem;
-        font-size: 0;
-        white-space: nowrap;
-        overflow: hidden;
-        
-    	.panel {
-            @extend %animation;
-    	    @extend %animation-speed-normal;
-    	    
-    	    display: inline-block;
-    	    width: 100%;
-    	    font-size: 1rem;
-    	}
-    }
+	.selectors {
+		padding: 0.5rem 0;
+		
+		.selector {
+			text-align: center;
+			cursor: pointer;
+			
+			&.active {
+				background-color: #EEE;
+			}
+			&.disable {
+				color: #DDD;
+				cursor: default;
+			}
+		}
+	}
+	.indicator {
+		@extend %animation;
+		@extend %animation-speed-normal;
+		
+		float: left;
+		height: 2px;
+		margin-top: -2px;
+	}
+	.panels {
+		padding: 0 1rem;
+		font-size: 0;
+		white-space: nowrap;
+		overflow: hidden;
+		
+		.panel {
+			@extend %animation;
+			@extend %animation-speed-normal;
+			
+			display: inline-block;
+			width: 100%;
+			font-size: 1rem;
+		}
+	}
 }
