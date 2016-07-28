@@ -10,6 +10,8 @@ import {Button} from '../../components/Button';
 import {Card, CardTitle, CardImg, CardItem} from '../../components/Card';
 import {Slider, SliderBar, SliderInput} from '../../components/Slider';
 
+import material from '../../public/material/material.scss';
+
 import Img_1 from '../../img/1.jpg';
 
 export const MainPage = React.createClass({
@@ -56,6 +58,7 @@ export const MainPage = React.createClass({
 						<SliderInput/>
 					</Slider>
 				</Dialog>
+				<Button type='flat' rippleColor='red'>Click Me</Button>
 				<Button type='flat' rippleColor='blue'>Click Me</Button>
 				<Card style={{width: 400}}>
 					<CardTitle>This is a card</CardTitle>

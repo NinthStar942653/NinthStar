@@ -149,11 +149,11 @@ const SliderController = React.createClass({
 export const SliderInput = React.createClass({
 	render() {
 		// Get props
-		const {className: CLASSNAME, value: VALUE, setValue: SET_VALUE} = this.props;
+		const {className: CLASSNAME, ...PROPS} = this.props;
 		const INPUT_CLASS = classNames([CLASSNAME, style.input]);
 		
 		return (
-			<Input className={INPUT_CLASS} value={VALUE} setValue={SET_VALUE}/>
+			<Input className={INPUT_CLASS} {...PROPS}/>
 		);
 	}
 });
