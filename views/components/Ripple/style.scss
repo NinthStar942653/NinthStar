@@ -18,6 +18,9 @@
 		background-color: $color-white;
 		border-radius: 100%;
 		
+		&.red {
+			background-color: $color-red;
+		}
 		&.blue {
 			background-color: $color-blue;
 		}

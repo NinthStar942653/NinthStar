@@ -10,6 +10,8 @@ import {Button} from '../../components/Button';
 import {Card, CardTitle, CardImg, CardItem} from '../../components/Card';
 import {Slider, SliderBar, SliderInput} from '../../components/Slider';
 
+import material from '../../public/material/material.scss';
+
 import Img_1 from '../../img/1.jpg';
 
 export const MainPage = React.createClass({
@@ -20,28 +22,28 @@ export const MainPage = React.createClass({
 					<TabPanel name="Tab 1" style={{color: "red"}}>
 						<h3>Tab Panel 1</h3>
 					</TabPanel>
-					<TabPanel name="Tab 2">
+					<TabPanel name="Tab 2" active={true}>
 						<h3>Tab Panel 2</h3>
 					</TabPanel>
-					<TabPanel name="Tab 3">
+					<TabPanel name="Tab 3" active={false}>
 						<h3>Tab Panel 3</h3>
 					</TabPanel>
 					<TabPanel name="Tab 4">
 						<h3>Tab Panel 4</h3>
 					</TabPanel>
 				</Tab>
-				<Collapsable accordion>
-					<CollapsablePanel name="Collapsable 1" active>
+				<Collapsable accordion={true}>
+					<CollapsablePanel name="Collapsable 1">
 						<p>Collapsable Panel 1</p>
 						<p>Collapsable Panel 1</p>
 						<p>Collapsable Panel 1</p>
 					</CollapsablePanel>
-					<CollapsablePanel name="Collapsable 2">
+					<CollapsablePanel name="Collapsable 2" active={true}>
 						<p>Collapsable Panel 2</p>
 						<p>Collapsable Panel 2</p>
 						<p>Collapsable Panel 2</p>
 					</CollapsablePanel>
-					<CollapsablePanel name="Collapsable 3">
+					<CollapsablePanel name="Collapsable 3" disable={true}>
 						<p>Collapsable Panel 3</p>
 						<p>Collapsable Panel 3</p>
 						<p>Collapsable Panel 3</p>
@@ -56,6 +58,7 @@ export const MainPage = React.createClass({
 						<SliderInput/>
 					</Slider>
 				</Dialog>
+				<Button type='flat' rippleColor='red'>Click Me</Button>
 				<Button type='flat' rippleColor='blue'>Click Me</Button>
 				<Card style={{width: 400}}>
 					<CardTitle>This is a card</CardTitle>

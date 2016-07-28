@@ -30,11 +30,8 @@ export const Collapsable = React.createClass({
 				active[index] = false;
 			// Active
 			} else {
-				// Normal type collapsable
-				if (ACCORDION === undefined) {
-					active[index] = true;
 				// Accortion type collapsable
-				} else {
+				if (ACCORDION === true) {
 					// No active panel yet
 					if (active_index === null) {
 						active_index = index;
@@ -44,6 +41,9 @@ export const Collapsable = React.createClass({
 						active[index] = false;
 						console.warn('[Collapsable] More than one active panel in accordion type. Only the first one will be set active.');
 					}
+				// Normal type collapsable
+				} else {
+					active[index] = true;
 				}
 			}
 		});
@@ -87,14 +87,14 @@ export const Collapsable = React.createClass({
 		// Get state
 		let active = this.state.active;
 		
-		// Normal type collapsable
-		if (ACCORDION === undefined) {
-			active[index] = !active[index];
 		// Accordion type collapsable
-		} else {
+		if (ACCORDION === true) {
 			for (let i = 0, l = active.length; i < l; ++i) {
 				active[i] = i === index ? !active[index] : false;
 			}
+		// Normal type collapsable
+		} else {
+			active[index] = !active[index];
 		}
 		
 		this.setState({
@@ -106,12 +106,12 @@ export const Collapsable = React.createClass({
 const CollapsableItem = React.createClass({
 	render() {
 		// Get props
-		const {className: CLASSNAME, name: NAME, index: INDEX, collapsableTrigger: COLLAPSABLE_TRIGGER, ...PROPS} = this.props;
+		const {className: CLASSNAME, name: NAME, index: INDEX, disable: DISABLE, collapsableTrigger: COLLAPSABLE_TRIGGER, ...PROPS} = this.props;
 		const ITEM_CLASS = classNames([CLASSNAME, style.item]);
 		
 		return (
 			<div className={ITEM_CLASS}>
-				<CollapsableTrigger index={INDEX} collapsableTrigger={COLLAPSABLE_TRIGGER}>
+				<CollapsableTrigger index={INDEX} disable={DISABLE} collapsableTrigger={COLLAPSABLE_TRIGGER}>
 				{
 					NAME
 				}
@@ -124,11 +124,18 @@ const CollapsableItem = React.createClass({
 
 const CollapsableTrigger = React.createClass({
 	handleClick() {
-		this.props.collapsableTrigger(this.props.index);
+		// Get props
+		const DISABLE = this.props.disable;
+		
+		// Not disable
+		if (!DISABLE) {
+			this.props.collapsableTrigger(this.props.index);
+		}
 	},
 	render() {
 		// Get props
-		const TRIGGER_CLASS = classNames([material.shadow1, style.trigger]);
+		const DISABLE = this.props.disable;
+		const TRIGGER_CLASS = classNames([material.shadow1, style.trigger, DISABLE ? style.disable : '']);
 		
 		return (
 			<div className={TRIGGER_CLASS} onClick={this.handleClick}>

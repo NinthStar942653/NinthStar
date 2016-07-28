@@ -15,14 +15,17 @@ export const Tab = React.createClass({
 	},
 	componentWillMount() {
 		// Get props
-		const {active: ACTIVE, children: CHILDREN} = this.props;
+		const CHILDREN = this.props.children;
 		
 		// Set initial active_index
 		let active_index = null;
 		
 		React.Children.map(CHILDREN, (panel, index) => {
+			// Get props
+			const ACTIVE = panel.props.active;
+			
 			// Active
-			if (ACTIVE) {
+			if (ACTIVE === true) {
 				// No active panel yet
 				if (active_index === null) {
 					active_index = index;
