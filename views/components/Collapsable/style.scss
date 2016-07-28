@@ -1,19 +1,24 @@
-/*
- * Component: Collapsable
- * Create:    2016-07-18
- */
+@import "../../public/material/material.scss";
+
 .item {
-    overflow: hidden;
-    background-color: #EEE;
-    
-    .trigger {
-        background-color: #FFF;
-        border-top: 1px solid #DDD;
-        cursor: pointer;
-    }
-    .panel {
-        overflow: hidden;
-        border-top: 1px solid #DDD;
-        transition-duration: 0.5s;
-    }
+	overflow: hidden;
+	
+	.trigger {
+		padding: 0.5rem 1rem;
+		border-top: 1px solid $color-border;
+		cursor: pointer;
+		
+		&.disable {
+			color: $color-disable;
+			cursor: default;
+		}
+	}
+	.panel {
+		@extend %animation;
+		@extend %animation-speed-normal;
+		
+		overflow: hidden;
+		padding: 0 1rem;
+		border-top: 1px solid $color-border;
+	}
 }
