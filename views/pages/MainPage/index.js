@@ -22,10 +22,10 @@ export const MainPage = React.createClass({
 					<TabPanel name="Tab 1" style={{color: "red"}}>
 						<h3>Tab Panel 1</h3>
 					</TabPanel>
-					<TabPanel name="Tab 2">
+					<TabPanel name="Tab 2" active={true}>
 						<h3>Tab Panel 2</h3>
 					</TabPanel>
-					<TabPanel name="Tab 3">
+					<TabPanel name="Tab 3" active={false}>
 						<h3>Tab Panel 3</h3>
 					</TabPanel>
 					<TabPanel name="Tab 4">
