@@ -6,46 +6,68 @@
 
 #### Introduction
 
-The component **Tab** has 2 labels: `<Tab>` and `<TabPanel>`. The latter ones should be wrapped in the former one.
+The component **Tab** provides an area for displaying large blocks of information.
 
-#### Usage
+**Tab** has 2 labels: `<Tab>` and `<TabPanel>`. The latter ones should be wrapped in the former one. It will automatically generate `<TabSelector>`s for selecting `<TabPanel>`s.
 
-Import the component(The filepath might be different in your environment):
-```JS
-import {Tab, TabPanel} from '../../components/Tab';
-```
-and use the component like this:
+#### Properties
+
+##### Tab
+| Name   | Type    | Default Value | Usage |
+|--------|---------|---------------|-------|
+
+##### TabPanel
+
+| Name   | Type    | Default Value | Usage |
+|--------|---------|---------------|-------|
+| name   | String  | <No Default>  | Name of each panel. It will be used to generate corresponding `<TabSelector>`.
+| active | Boolean | false         | Tab will be selected initially if active is set true. Only the first one will be set actived when there are more than one active panel. If no active panels, the first one will be set actived. |
+
+#### Example
+
 ```HTML
 <Tab>
     <TabPanel name="Tab 1">
         <div>Panel 1</div>
     </TabPanel>
-    <TabPanel name="Tab 2">
+    <TabPanel name="Tab 2" active="true">
         <div>Panel 1</div>
     </TabPanel>
-    <TabPanel name="Tab 3">
+    <TabPanel name="Tab 3" active="false">
         <div>Panel 1</div>
     </TabPanel>
 </Tab>
 ```
-The component **Tab** will automatically generate `<TabSelector>` for selecting, and `name` attributes in `<TabPanel>` will be set as the content of the `<TabSelector>`.
+
+The `<TabPanel>` named 'Tab 2' will be initially set active.
 
 ### Collapsable
 
 #### Introduction
 
-The component **Collapsable** has 2 labels: `<Collapsable>` and `<CollapsablePanel>`. The latter ones should be wrapped in the former one.
+The component **Collapsable** provides an area which could be folded and deployed.
 
-#### Usage
+**Collapsable** has 2 labels: `<Collapsable>` and `<CollapsablePanel>`. The latter ones should be wrapped in the former one.
 
-Import the component(The filepath might be different in your environment):
-```JS
-import {Collapsable, CollapsablePanel} from '../../components/Collapsable';
-```
-and use the component like this:
+#### Properties
+
+##### Collapsable
+
+| Name      | Type    | Default Value | Usage |
+|-----------|---------|---------------|-------|
+| accordion | Boolean | false         | Accortion type Collapsable will make sure that there is no more than one panel set actived.
+
+##### CollapsablePanel
+
+| Name   | Type    | Default Value | Usage |
+|--------|---------|---------------|-------|
+| active | Boolean | false         | Collapsable will be actived initially if active is set true. In accordion type Collapsable, only the first one will be set actived. |
+
+#### Example
+
 ```HTML
-<Collapsable>
-    <CollapsablePanel>
+<Collapsable accordion="true">
+    <CollapsablePanel active="true">
         <div>Panel 1</div>
     </CollapsablePanel>
     <CollapsablePanel>
@@ -57,11 +79,7 @@ and use the component like this:
 </Collapsable>
 ```
 
-You can add *accordion* in the `<Collapsable>` label:
-```HTML
-<Collapsable accordion>
-```
-The component **Collapsable** with attribute `accordion` will make sure the number of the open `<CollapsablePanel>`s no more than 1. If user try to open a panel while another panel is open, the another one will be closed.
+The first `<CollapsablePanel>` will automatically opened. When user selects a panel, all other panels will close.
 
 ### Dialog
 
@@ -69,13 +87,16 @@ The component **Collapsable** with attribute `accordion` will make sure the numb
 
 The component **Dialog** has 1 label:`<Dialog>`. It will float over the page if attribute `visible` is set to `true`. When the attribute changes, an animation `visible` will occur.
 
-#### Usage
+#### Properties
 
-Import the component(The filepath might be different in your environment):
-```JS
-import {Dialog} from '../../components/Dialog'
-```
-and use the component like this:
+##### Dialog
+
+| Name    | Type    | Default Value | Usage |
+|---------|---------|---------------|-------|
+| visible | Boolean | false         | It decides whether the Dialog will be displayed or not. |
+
+#### Example
+
 ```HTML
 <Dialog visible={is_dialog_visible}>
     <div>This is the content of dialog.</div>
@@ -88,35 +109,44 @@ Change the value of the variable, the `<Dialog>` will fade in/out.
 
 #### Introduction
 
-The component **Ripple** has 1 label:`<Ripple>`. When the label contained `<Ripple>` is clicked, a ripple effect will occur for response.
+The component **Ripple** provides the ripple effect when user clicks the parent component.
 
-#### Usage
-
-Import the component(The filepath might be different in your environment):
-```JS
-import {Ripple} from '../../components/Ripple'
-```
-and use the component like this:
-```HTML
-<div style={{position: relative}}>
-    <Ripple/>
-</div>
-```
+**Ripple** has 1 label:`<Ripple>`. When the label contained `<Ripple>` is clicked, a ripple effect will occur for response.
 
 The outer label must set the style `position: relative` or `position: absolute` cause the `<Ripple>` has the style `position: absolute` for positioning
+
+#### Properties
+
+##### Ripple
+
+| Name    | Type   | Default Value | Usage |
+|---------|--------|---------------|-------|
+| color   | String | <No Default>  | Color decides the color of `<Ripple>`. It can be 'white', 'red' or 'blue'. |
+
+#### Example
+
+```HTML
+<div style={{position: relative}}>
+    <Ripple color="blue"/>
+</div>
+```
 
 ### Button
 
 The component **Button** has 1 label:`<Button>`.
 
-#### Usage
+**Button** will automatically import component **Ripple**.
 
-Import the component(The filepath might be different in your environment):
-```JS
-import {Button} from '../../components/Button'
-```
-and use the component like this:
+#### Properties
+
+##### Button
+
+| Name        | Type   | Default Value | Usage |
+|-------------|--------|---------------|-------|
+| rippleColor | String | <No Default>  | The color of the `<Ripple>` inside. See Ripple->Properties. |
+
+#### Example
+
 ```HTML
-<Button>Click me!</Button>
+<Button rippleColor="blue">Click me!</Button>
 ```
-The component **Button** will automatically import component **Ripple**.
