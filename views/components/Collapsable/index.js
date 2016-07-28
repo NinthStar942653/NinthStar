@@ -25,8 +25,11 @@ export const Collapsable = React.createClass({
 		React.Children.map(CHILDREN, (item, index) => {
 			const ACTIVE = item.props.active;
 			
+			// No active
+			if (ACTIVE === undefined) {
+				active[index] = false;
 			// Active
-			if (ACTIVE === true) {
+			} else {
 				// Accortion type collapsable
 				if (ACCORDION === true) {
 					// No active panel yet
@@ -42,9 +45,6 @@ export const Collapsable = React.createClass({
 				} else {
 					active[index] = true;
 				}
-			// No active
-			} else {
-				active[index] = false;
 			}
 		});
 		
@@ -127,6 +127,7 @@ const CollapsableTrigger = React.createClass({
 		// Get props
 		const DISABLE = this.props.disable;
 		
+		// Not disable
 		if (!DISABLE) {
 			this.props.collapsableTrigger(this.props.index);
 		}
