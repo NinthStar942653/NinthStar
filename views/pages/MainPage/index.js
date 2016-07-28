@@ -32,8 +32,8 @@ export const MainPage = React.createClass({
 						<h3>Tab Panel 4</h3>
 					</TabPanel>
 				</Tab>
-				<Collapsable accordion>
-					<CollapsablePanel name="Collapsable 1" active>
+				<Collapsable accordion={true}>
+					<CollapsablePanel name="Collapsable 1" active={true}>
 						<p>Collapsable Panel 1</p>
 						<p>Collapsable Panel 1</p>
 						<p>Collapsable Panel 1</p>
