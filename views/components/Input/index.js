@@ -8,11 +8,11 @@ import style from './style';
 
 export const Input = React.createClass({
 	handleChange(evt) {
-		this.props.setValue(evt.target.value);
+		this.props.onChange(evt.target.value);
 	},
 	render() {
 		// Get props
-		const {className: CLASSNAME, value: VALUE, setValue, ...PROPS} = this.props;
+		const {className: CLASSNAME, value: VALUE, onChange, ...PROPS} = this.props;
 		const INPUT_CLASS = classNames([CLASSNAME, style.input]);
 		
 		return (

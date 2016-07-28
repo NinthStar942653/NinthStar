@@ -43,7 +43,7 @@ export const Ripple = React.createClass({
 		const RIPPLE_CLASS = classNames([style.ripple]);
 		
 		// Unknown color
-		if (COLOR !== undefined && style[COLOR] === undefined) {
+		if (COLOR !== undefined && COLOR !== 'white' && style[COLOR] === undefined) {
 			console.warn('[Ripple] Unknown color "' + COLOR + '". Regard as not set(default white).');
 		}
 		
