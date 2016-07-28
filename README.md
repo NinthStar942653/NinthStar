@@ -12,15 +12,11 @@ The component **Tab** provides an area for displaying large blocks of informatio
 
 #### Properties
 
-##### Tab
-| Name   | Type    | Default Value | Usage |
-|--------|---------|---------------|-------|
-
 ##### TabPanel
 
 | Name   | Type    | Default Value | Usage |
 |--------|---------|---------------|-------|
-| name   | String  | <No Default>  | Name of each panel. It will be used to generate corresponding `<TabSelector>`.
+| name   | String  | -No Default-  | Name of each panel. It will be used to generate corresponding `<TabSelector>`.
 | active | Boolean | false         | Tab will be selected initially if active is set true. Only the first one will be set actived when there are more than one active panel. If no active panels, the first one will be set actived. |
 
 #### Example
@@ -31,10 +27,10 @@ The component **Tab** provides an area for displaying large blocks of informatio
         <div>Panel 1</div>
     </TabPanel>
     <TabPanel name="Tab 2" active="true">
-        <div>Panel 1</div>
+        <div>Panel 2</div>
     </TabPanel>
     <TabPanel name="Tab 3" active="false">
-        <div>Panel 1</div>
+        <div>Panel 3</div>
     </TabPanel>
 </Tab>
 ```
@@ -59,9 +55,10 @@ The component **Collapsable** provides an area which could be folded and deploye
 
 ##### CollapsablePanel
 
-| Name   | Type    | Default Value | Usage |
-|--------|---------|---------------|-------|
-| active | Boolean | false         | Collapsable will be actived initially if active is set true. In accordion type Collapsable, only the first one will be set actived. |
+| Name    | Type    | Default Value | Usage |
+|---------|---------|---------------|-------|
+| active  | Boolean | false         | Collapsable will be actived initially if active is set true. In accordion type Collapsable, only the first one will be set actived. |
+| disable | Boolean | false         | Collapsable will be unable to open if disable is set true. |
 
 #### Example
 
@@ -70,16 +67,16 @@ The component **Collapsable** provides an area which could be folded and deploye
     <CollapsablePanel active="true">
         <div>Panel 1</div>
     </CollapsablePanel>
-    <CollapsablePanel>
-        <div>Panel 1</div>
+    <CollapsablePanel disable="true">
+        <div>Panel 2</div>
     </CollapsablePanel>
     <CollapsablePanel>
-        <div>Panel 1</div>
+        <div>Panel 3</div>
     </CollapsablePanel>
 </Collapsable>
 ```
 
-The first `<CollapsablePanel>` will automatically opened. When user selects a panel, all other panels will close.
+The first `<CollapsablePanel>` will automatically opened, and the second one will be disabled. When user selects a panel, all other panels will close.
 
 ### Dialog
 
@@ -93,7 +90,7 @@ The component **Dialog** has 1 label:`<Dialog>`. It will float over the page if 
 
 | Name    | Type    | Default Value | Usage |
 |---------|---------|---------------|-------|
-| visible | Boolean | false         | It decides whether the Dialog will be displayed or not. |
+| visible | Boolean | false         | It decides whether the `<Dialog>` will be displayed or not. |
 
 #### Example
 
@@ -121,7 +118,7 @@ The outer label must set the style `position: relative` or `position: absolute` 
 
 | Name    | Type   | Default Value | Usage |
 |---------|--------|---------------|-------|
-| color   | String | <No Default>  | Color decides the color of `<Ripple>`. It can be 'white', 'red' or 'blue'. |
+| color   | String | -No Default-  | Color decides the color of `<Ripple>`. It can be 'white', 'red' or 'blue'. |
 
 #### Example
 
@@ -133,9 +130,13 @@ The outer label must set the style `position: relative` or `position: absolute` 
 
 ### Button
 
-The component **Button** has 1 label:`<Button>`.
+#### Introduction
 
-**Button** will automatically import component **Ripple**.
+The component **Button** is a basic component responsing to user click events.
+
+**Button** has 1 label:`<Button>`.
+
+It will automatically use `<Ripple>` for response.
 
 #### Properties
 
@@ -143,10 +144,95 @@ The component **Button** has 1 label:`<Button>`.
 
 | Name        | Type   | Default Value | Usage |
 |-------------|--------|---------------|-------|
-| rippleColor | String | <No Default>  | The color of the `<Ripple>` inside. See Ripple->Properties. |
+| rippleColor | String | -No Default-  | The color of the `<Ripple>` inside. See Ripple->Properties. |
 
 #### Example
 
 ```HTML
 <Button rippleColor="blue">Click me!</Button>
+```
+
+### Card
+
+#### Introduction
+
+The component **Card** provides several ways to display different type of information.
+
+**Card** has 4 labels: `<Card>`, `<CardTitle>`, `<CardImg>` and `<CardItem>`. The `<CardTitle>`, `<CardImg>` and `<CardItem>` should be wrapped in the first one.
+
+The `<CardTitle>` will be rendered as an `<h3>` label. If it's wrapped in a `<CardImg>` it will be set lower-left in the image.
+
+The `<CardImg>` can be used to wrap label `<img>`.
+
+The `<CardItem>` will be rendered as a `<div>` which can contain various contents. It can contain `<img>` but it's deprecated.
+
+#### Example
+
+```HTML
+<Card style={{width: 400}}>
+	<CardTitle>This is a card</CardTitle>
+	<CardImg>
+		<img src={Img_1}/>
+		<CardTitle>Title</CardTitle>
+		<Ripple color='blue'/>
+	</CardImg>
+	<CardItem>
+		<p>This is a text in card item</p>
+		<p>This is another text in card item</p>
+	</CardItem>
+</Card>
+```
+
+### Input
+
+#### Introduction
+
+The component **Input** is a basic component receiving user inputs.
+
+**Input** has 1 label: `<Input>`.
+
+#### Properties
+
+##### Input
+
+| Name     | Type     | Default Value | Usage |
+|----------|----------|---------------|-------|
+| value    | Number   | 0             | Initial value of `<Input>` |
+| onChange | Function | -No Default-  | The callback function when user modify the value of `<Input>`. Receiving (Number) as parameter. |
+
+#### Example
+
+```HTML
+<Input value="3" onChange={onChange}/>
+```
+
+The value of `<Input>` will be 3 initially. When user change the value, onChange(evt.target.value) will be called.
+
+### Slider
+
+#### Introduction
+
+The component **Slider** is a component receiving value inputs.
+
+**Slider** has 3 labels: `<Slider>`, `<SliderBar>` and `<SliderInput>`. The `<SliderBar>` and `<SliderInput>` should be wrapped in the first one.
+
+#### Properties
+
+##### Slider
+
+| Name     | Type     | Default Value | Usage |
+|----------|----------|---------------|-------|
+| min      | Number   | -No Default-  | The min value of `<Slider>`. Must be set. |
+| max      | Number   | -No Default-  | The max value of `<Slider>`. Must be set. |
+| step     | Number   | -No Default-  | The minimum value change of `<Slider>`. Must be set. |
+| value    | Number   | 0             | The initial value of `<Slider>`. Must be set. |
+| type     | RESERVED | RESERVED      | RESERVED |
+
+#### Example
+
+```HTML
+<Slider min="0" max="100" step="1" value="10">
+	<SliderBar/>
+	<SliderInput/>
+</Slider>
 ```

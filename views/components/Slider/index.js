@@ -27,6 +27,11 @@ export const Slider = React.createClass({
 		const {className: CLASSNAME, min: MIN, max: MAX, step, value, type, ...PROPS} = this.props;
 		const SLIDER_CLASS = classNames([CLASSNAME, style.slider]);
 		
+		if (MIN === undefined || MAX === undefined || step === undefined) {
+			console.error('[Slider] Props not set.');
+			return;
+		}
+		
 		if (MIN > MAX) {
 			console.warn('[Slider] Min(' + MIN + ') is larger than max(' + MAX + ').');
 		}
@@ -44,7 +49,7 @@ export const Slider = React.createClass({
 						);
 					case 'SliderInput':
 						return (
-							<SliderInput value={this.state.value} setValue={this.setValue} {...sub.props}/>
+							<SliderInput value={this.state.value} onChange={this.setValue} {...sub.props}/>
 						);
 					default:
 						console.warn('[Slider] Illegal subcomponent "' + TYPE + '".');
