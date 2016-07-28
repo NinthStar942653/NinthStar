@@ -33,17 +33,17 @@ export const MainPage = React.createClass({
 					</TabPanel>
 				</Tab>
 				<Collapsable accordion={true}>
-					<CollapsablePanel name="Collapsable 1" active={true}>
+					<CollapsablePanel name="Collapsable 1">
 						<p>Collapsable Panel 1</p>
 						<p>Collapsable Panel 1</p>
 						<p>Collapsable Panel 1</p>
 					</CollapsablePanel>
-					<CollapsablePanel name="Collapsable 2">
+					<CollapsablePanel name="Collapsable 2" active={true}>
 						<p>Collapsable Panel 2</p>
 						<p>Collapsable Panel 2</p>
 						<p>Collapsable Panel 2</p>
 					</CollapsablePanel>
-					<CollapsablePanel name="Collapsable 3">
+					<CollapsablePanel name="Collapsable 3" disable={true}>
 						<p>Collapsable Panel 3</p>
 						<p>Collapsable Panel 3</p>
 						<p>Collapsable Panel 3</p>
