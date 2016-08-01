@@ -18,8 +18,8 @@ export const MainPage = React.createClass({
 	render() {
 		return (
 			<div>
-				<Tab style={{color: "blue"}}>
-					<TabPanel name="Tab 1" style={{color: "red"}}>
+				<Tab>
+					<TabPanel name="Tab 1">
 						<h3>Tab Panel 1</h3>
 					</TabPanel>
 					<TabPanel name="Tab 2" active={true}>
