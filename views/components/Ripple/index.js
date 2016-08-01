@@ -26,8 +26,8 @@ export const Ripple = React.createClass({
 		// Add new effect
 		effectsProps.push({
 			key: this.state.counter,
-			x: evt.pageX - RIPPLE.getBoundingClientRect().left,
-			y: evt.pageY - RIPPLE.getBoundingClientRect().top,
+			x: evt.pageX - RIPPLE.getBoundingClientRect().left - document.documentElement.scrollLeft,
+			y: evt.pageY - RIPPLE.getBoundingClientRect().top - document.documentElement.scrollTop,
 			scale: Math.sqrt(RIPPLE.offsetWidth * RIPPLE.offsetWidth + RIPPLE.offsetHeight * RIPPLE.offsetHeight)
 		});
 		
