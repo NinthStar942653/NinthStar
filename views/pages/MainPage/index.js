@@ -50,9 +50,6 @@ export const MainPage = React.createClass({
 					</CollapsablePanel>
 				</Collapsable>
 				<Dialog visible={true}>
-					<div style={{position: 'relative', width: 100, height: 100, backgroundColor: "#00F"}}>
-						<Ripple/>
-					</div>
 					<Slider min={0} max={100} step={1} value={10}>
 						<SliderBar/>
 						<SliderInput/>

@@ -73,10 +73,11 @@ export const Slider = React.createClass({
 export const SliderBar = React.createClass({
 	getInitialState() {
 		return {
+			mouseDown: false,
 			drag: false
 		};
 	},
-	handleClick(evt) {
+	handleMouseDown(evt) {
 		// Get props
 		const {min: MIN, max: MAX} = this.props;
 		const BAR = ReactDOM.findDOMNode(this);
@@ -85,14 +86,13 @@ export const SliderBar = React.createClass({
 		const VALUE = X * (MAX - MIN) / LENGTH + MIN;
 		
 		this.props.setValue(VALUE);
-	},
-	handleMouseDown(evt) {
+		
 		this.setState({
-			drag: true
+			mouseDown: true
 		});
 	},
 	handleMouseMove(evt) {
-		if (this.state.drag) {
+		if (this.state.mouseDown) {
 			// Get props
 			const {min: MIN, max: MAX} = this.props;
 			const BAR = ReactDOM.findDOMNode(this);
@@ -101,51 +101,50 @@ export const SliderBar = React.createClass({
 			const VALUE = X * (MAX - MIN) / LENGTH + MIN;
 			
 			this.props.setValue(VALUE);
+			
+			this.setState({
+				drag: true
+			});
 		}
 	},
 	handleMouseUp() {
 		this.setState({
+			mouseDown: false,
 			drag: false
 		});
 	},
 	handleMouseLeave() {
 		this.setState({
+			mouseDown: false,
 			drag: false
 		});
 	},
 	render() {
 		const {className: CLASSNAME, min: MIN, max: MAX, value: VALUE, type, setValue, ...PROPS} = this.props;
 		const BAR_CLASSNAME = classNames([CLASSNAME, style.bar]);
-		const BAR_DISPLAY_CLASSNAME = classNames([style.display]);
-		const CONTROLLER_STYLE = {
-			left: VALUE * 100 / (MAX - MIN) + '%'
+		const BAR_CLICKER_CLASSNAME = classNames([CLASSNAME, style.clicker]);
+		const BAR_OUTER_CLASSNAME = classNames([style.barOuter]);
+		const BAR_INNER_CLASSNAME = classNames([style.barInner]);
+		const BAR_INNER_STYLE = {
+			width: VALUE * 100 / (MAX - MIN) + '%',
+			transitionDuration: this.state.drag ? '0s' : ''
 		};
+		const CONTROLLER_OUTER_CLASS = classNames([style.controllerOuter]);
+		const CONTROLLER_INNER_CLASS = classNames([style.controllerInner]);
 		
 		return (
 			<div className={BAR_CLASSNAME}
-				onClick={this.handleClick}
 				onMouseDown={this.handleMouseDown}
 				onMouseMove={this.handleMouseMove}
 				onMouseUp={this.handleMouseUp}
 				onMouseLeave={this.handleMouseLeave}
 				{...PROPS}>
-				<div className={BAR_DISPLAY_CLASSNAME}/>
-				<SliderController style={CONTROLLER_STYLE}/>
-			</div>
-		);
-	}
-});
-
-const SliderController = React.createClass({
-	render() {
-		// Get props
-		const STYLE = this.props.style;
-		const CONTROLLER_OUTER_CLASS = classNames([style.outer]);
-		const CONTROLLER_INNER_CLASS = classNames([style.inner]);
-		
-		return (
-			<div className={CONTROLLER_OUTER_CLASS} style={STYLE}>
-				<div className={CONTROLLER_INNER_CLASS}/>
+				<div className={BAR_OUTER_CLASSNAME}>
+					<div className={BAR_INNER_CLASSNAME} style={BAR_INNER_STYLE}/>
+					<div className={CONTROLLER_OUTER_CLASS}>
+						<div className={CONTROLLER_INNER_CLASS}/>
+					</div>
+				</div>
 			</div>
 		);
 	}
