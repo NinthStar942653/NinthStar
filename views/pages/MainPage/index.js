@@ -9,10 +9,26 @@ import {Dialog} from '../../components/Dialog';
 import {Button} from '../../components/Button';
 import {Card, CardTitle, CardImg, CardItem} from '../../components/Card';
 import {Slider, SliderBar, SliderInput} from '../../components/Slider';
-
-import material from '../../public/material/material.scss';
+import {Table} from '../../components/Table';
 
 import Img_1 from '../../img/1.jpg';
+
+const column = [{
+	title: 'Name',
+	index: 'name'
+}, {
+	title: 'ID',
+	index: 'id'
+}];
+const data = [{
+	key: 1,
+	name: 'Alice',
+	id: 1
+}, {
+	key: 2,
+	name: 'Bob',
+	id: 2
+}];
 
 export const MainPage = React.createClass({
 	render() {
@@ -50,6 +66,7 @@ export const MainPage = React.createClass({
 					</CollapsablePanel>
 				</Collapsable>
 				<Dialog visible={true}>
+					<Table column={column} data={data}/>
 					<Slider min={0} max={100} step={1} value={10}>
 						<SliderBar/>
 						<SliderInput/>
