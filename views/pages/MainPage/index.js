@@ -15,19 +15,22 @@ import Img_1 from '../../img/1.jpg';
 
 const column = [{
 	title: 'Name',
-	index: 'name'
+	index: 'name',
+	sortable: true
 }, {
 	title: 'ID',
-	index: 'id'
+	index: 'id',
+	sortable: true
 }];
 const data = [{
-	key: 1,
 	name: 'Alice',
 	id: 1
 }, {
-	key: 2,
 	name: 'Bob',
 	id: 2
+}, {
+	name: 'Steve',
+	id: 3
 }];
 
 export const MainPage = React.createClass({

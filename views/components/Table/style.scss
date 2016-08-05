@@ -1,0 +1,33 @@
+@import "../../public/material/material.scss";
+
+.table {
+	width: 100%;
+	border-top: 2px solid $color-border;
+	border-bottom: 2px solid $color-border;
+	border-collapse: collapse;
+	
+	tr {
+		border-bottom: 1px solid $color-border;
+		
+		th {
+			padding: 0.5rem 1rem;
+			
+			&.sortable {
+				cursor: pointer;
+			}
+		}
+		td {
+			padding: 0.5rem 1rem;
+			
+			&.alignLeft {
+				text-align: left;
+			}
+			&.alignCenter {
+				text-align: middle;
+			}
+			&.alignRight {
+				text-align: right;
+			}
+		}
+	}
+}
