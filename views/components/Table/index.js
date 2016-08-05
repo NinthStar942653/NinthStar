@@ -73,20 +73,20 @@ export const Table = React.createClass({
 		
 		if (column_index === LAST_SORT_INDEX) {
 			this.setState({
-				lastSortDir: !LAST_SORT_DIR
+				lastSortDir: !LAST_SORT_DIR,
+				data: DATA.sort(function(lhs, rhs) {
+					return (lhs[INDEX] < rhs[INDEX] ? -1 : 1) * (LAST_SORT_DIR ? 1 : -1);
+				})
 			});
 		} else {
 			this.setState({
 				lastSortIndex: column_index,
-				lastSortDir: false
+				lastSortDir: false,
+				data: DATA.sort(function(lhs, rhs) {
+					return (lhs[INDEX] < rhs[INDEX] ? -1 : 1);
+				})
 			});
 		}
-		
-		this.setState({
-			data: DATA.sort(function(lhs, rhs) {
-				return (lhs[INDEX] < rhs[INDEX] ? 1 : -1) * (LAST_SORT_DIR ? 1 : -1);
-			})
-		});
 	}
 });
 
