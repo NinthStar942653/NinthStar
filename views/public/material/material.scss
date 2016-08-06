@@ -6,6 +6,23 @@
 %animation-speed-normal  { transition-duration: 0.5s ; }
 %animation-speed-slow    { transition-duration: 0.75s; }
 
+.mtb1 { margin-top:   0.5rem; margin-bottom:  0.5rem; }
+.mtb2 { margin-top:   1.0rem; margin-bottom:  1.0rem; }
+.mtb3 { margin-top:   1.5rem; margin-bottom:  1.5rem; }
+.mtb4 { margin-top:   2.0rem; margin-bottom:  2.0rem; }
+.mlr1 { margin-left:  0.5rem; margin-right:   0.5rem; }
+.mlr2 { margin-left:  1.0rem; margin-right:   1.0rem; }
+.mlr3 { margin-left:  1.5rem; margin-right:   1.5rem; }
+.mlr4 { margin-left:  2.0rem; margin-right:   2.0rem; }
+.plr1 { padding-left: 0.5rem; padding-right:  0.5rem; }
+.plr2 { padding-left: 1.0rem; padding-right:  1.0rem; }
+.plr3 { padding-left: 1.5rem; padding-right:  1.5rem; }
+.plr4 { padding-left: 2.0rem; padding-right:  2.0rem; }
+.mtb1 { padding-top:  0.5rem; padding-bottom: 0.5rem; }
+.mtb2 { padding-top:  1.0rem; padding-bottom: 1.0rem; }
+.mtb3 { padding-top:  1.5rem; padding-bottom: 1.5rem; }
+.mtb4 { padding-top:  2.0rem; padding-bottom: 2.0rem; }
+
 .row:after { @extend %clearfix; }
 	.col { float: left; }
 	.col.grid-s1      { width: 8.33%; }
@@ -136,23 +153,23 @@ $color-shadow: $color-black;
 .shadow5 { box-shadow: 0 20px 25px 0 rgba($color-black, 0.21), 0 36px 64px 0 rgba($color-black, 0.23); }
 
 .interactHover {
-	@extend %animation;
-	@extend %animation-speed-normal;
+	position: relative;
 	
-	&.shadow0:hover { @extend .shadow1; }
-	&.shadow1:hover { @extend .shadow2; }
-	&.shadow2:hover { @extend .shadow3; }
-	&.shadow3:hover { @extend .shadow4; }
-	&.shadow4:hover { @extend .shadow5; }
-	&.colorMain:hover          { background-color: $color-main-lighten1; }
-	&.colorMain.lighten1:hover { background-color: $color-main-lighten2; }
-	&.colorMain.lighten2:hover { background-color: $color-main-lighten3; }
-	&.colorMain.lighten3:hover { background-color: $color-main-lighten4; }
-	&.colorMain.lighten4:hover { background-color: $color-main-lighten5; }
-	&.colorMain.darken1:hover  { background-color: $color-main; }
-	&.colorMain.darken2:hover  { background-color: $color-main-darken1; }
-	&.colorMain.darken3:hover  { background-color: $color-main-darken2; }
-	&.colorMain.darken4:hover  { background-color: $color-main-darken3; }
+	&:before {
+		@extend %animation;
+		@extend %animation-speed-normal;
+		
+		content: "";
+		position: absolute;
+		top:    0;
+		right:  0;
+		bottom: 0;
+		left:   0;
+		background-color: $color-white;
+		opacity: 0;
+	}
+	
+	&:hover:before { opacity: 0.2; }
 }
 
 .interactActive {
@@ -168,9 +185,9 @@ $color-shadow: $color-black;
 		right:  0;
 		bottom: 0;
 		left:   0;
-		background-color: #FFF;
+		background-color: $color-white;
 		opacity: 0;
 	}
 	
-	&:active:before { opacity: 0.2; }
+	&:active:before { opacity: 0.3; }
 }

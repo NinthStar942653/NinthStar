@@ -15,13 +15,6 @@ export const Slider = React.createClass({
 			value: 0
 		};
 	},
-	componentDidMount() {
-		const VALUE = this.props.value;
-		
-		this.setState({
-			value: VALUE === undefined ? 0 : VALUE
-		});
-	},
 	render() {
 		// Get props
 		const {className: CLASSNAME, min: MIN, max: MAX, step, value, type, ...PROPS} = this.props;
@@ -49,7 +42,7 @@ export const Slider = React.createClass({
 						);
 					case 'SliderInput':
 						return (
-							<SliderInput value={this.state.value} onChange={this.setValue} {...sub.props}/>
+							<SliderInput value={this.state.value} setValue={this.setValue} {...sub.props}/>
 						);
 					default:
 						console.warn('[Slider] Illegal subcomponent "' + TYPE + '".');

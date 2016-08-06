@@ -14,7 +14,7 @@ export const Collapsable = React.createClass({
 			active: []
 		};
 	},
-	componentDidMount() {
+	componentWillMount() {
 		// Get props
 		const {children: CHILDREN, accordion: ACCORDION} = this.props;
 		
