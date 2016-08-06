@@ -8,24 +8,26 @@ import material from '../../public/material/material.scss';
 import style from './style';
 
 export const Table = React.createClass({
+	propTypes: {
+		column: React.PropTypes.array,
+		data: React.PropTypes.array
+	},
+	getDefaultProps() {
+		return {
+			column: [],
+			data: []
+		}
+	},
 	getInitialState() {
 		return {
-			data: [],
+			data: this.props.data,
 			lastSortIndex: null,
 			lastSortDir: null
 		};
 	},
-	componentWillMount() {
-		const DATA = this.props.data;
-		
-		this.setState({
-			data: DATA
-		});
-	},
 	render() {
 		// Get props
 		const {className: CLASSNAME, column: COLUMN, data, ...PROPS} = this.props;
-		const DATA = this.state.data;
 		const TABLE_CLASS = classNames([CLASSNAME, style.table]);
 		
 		return (
@@ -44,7 +46,7 @@ export const Table = React.createClass({
 				
 				<tbody>
 				{
-					DATA.map((item, index) => {
+					this.state.data.map((item, index) => {
 						return (
 							<tr key={index}>
 							{
@@ -67,8 +69,7 @@ export const Table = React.createClass({
 		);
 	},
 	sort(column_index) {
-		const COLUMN = this.props.column;
-		const INDEX = COLUMN[column_index].index;
+		const INDEX = this.props.column[column_index].index;
 		const {data: DATA, lastSortIndex: LAST_SORT_INDEX, lastSortDir: LAST_SORT_DIR} = this.state;
 		
 		if (column_index === LAST_SORT_INDEX) {
@@ -92,9 +93,7 @@ export const Table = React.createClass({
 
 const TableHead = React.createClass({
 	handleClick() {
-		const {index: INDEX, sort: SORT} = this.props;
-		
-		SORT(INDEX);
+		this.props.sort(this.props.index);
 	},
 	render() {
 		const {className: CLASSNAME, data: DATA, index, sort} = this.props;

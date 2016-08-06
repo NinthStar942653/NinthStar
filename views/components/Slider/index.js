@@ -10,27 +10,29 @@ import style from './style';
 import {Input} from '../Input';
 
 export const Slider = React.createClass({
+	propTypes: {
+		min: React.PropTypes.number,
+		max: React.PropTypes.number,
+		step: React.PropTypes.number,
+		value: React.PropTypes.number
+	},
+	getDefaultProps() {
+		return {
+			min: 0,
+			max: 1,
+			step: 1,
+			value: 0
+		}
+	},
 	getInitialState() {
 		return {
-			value: 0
+			value: this.props.value
 		};
-	},
-	componentWillMount() {
-		const VALUE = this.props.value;
-		
-		this.setState({
-			value: VALUE
-		});
 	},
 	render() {
 		// Get props
-		const {className: CLASSNAME, min: MIN, max: MAX, step, value, type, ...PROPS} = this.props;
+		const {className: CLASSNAME, min: MIN, max: MAX, step, value, ...PROPS} = this.props;
 		const SLIDER_CLASS = classNames([CLASSNAME, style.slider]);
-		
-		if (MIN === undefined || MAX === undefined || step === undefined) {
-			console.error('[Slider] Props not set.');
-			return;
-		}
 		
 		if (MIN > MAX) {
 			console.warn('[Slider] Min(' + MIN + ') is larger than max(' + MAX + ').');

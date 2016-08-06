@@ -53,7 +53,7 @@ export const MainPage = React.createClass({
 						<h3>Tab Panel 4</h3>
 					</TabPanel>
 				</Tab>
-				<Collapsable accordion={true}>
+				<Collapsable type="accordion">
 					<CollapsablePanel name="Collapsable 1">
 						<p>Collapsable Panel 1</p>
 						<p>Collapsable Panel 1</p>
@@ -64,7 +64,7 @@ export const MainPage = React.createClass({
 						<p>Collapsable Panel 2</p>
 						<p>Collapsable Panel 2</p>
 					</CollapsablePanel>
-					<CollapsablePanel name="Collapsable 3" disable={true}>
+					<CollapsablePanel name="Collapsable 3">
 						<p>Collapsable Panel 3</p>
 						<p>Collapsable Panel 3</p>
 						<p>Collapsable Panel 3</p>
@@ -77,8 +77,14 @@ export const MainPage = React.createClass({
 						<SliderInput/>
 					</Slider>
 				</Dialog>
-				<Button type='flat' className={material.colorMain} rippleColor='red'>Click Me</Button>
-				<Button type='flat' className={material.colorMain} rippleColor='blue'>Click Me</Button>
+				<Button type='flat' className={material.colorMain}>
+					<Ripple/>
+					Click Me
+				</Button>
+				<Button type='flat' className={material.colorMain}>
+					<Ripple color="red"/>
+					Click Me
+				</Button>
 				<Card style={{width: 400}}>
 					<CardTitle>This is a card</CardTitle>
 					<CardImg>

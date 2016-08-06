@@ -7,19 +7,20 @@ import material from '../../public/material/material.scss';
 import style from './style';
 
 export const Input = React.createClass({
-	getInitialState() {
-		const VALUE = this.props.value;
-		
+	propTypes: {
+		value: React.PropTypes.number,
+		setValue: React.PropTypes.func
+	},
+	getDefaultProps() {
 		return {
-			value: VALUE
+			value: 0,
+			setValue: new Function()
 		};
 	},
-	componentWillMount() {
-		const VALUE = this.props.value;
-		
-		this.setState({
-			value: VALUE
-		});
+	getInitialState() {
+		return {
+			value: this.props.value
+		};
 	},
 	componentWillReceiveProps(nextProps) {
 		this.setState({
@@ -37,11 +38,10 @@ export const Input = React.createClass({
 	render() {
 		// Get props
 		const {className: CLASSNAME, value, setValue, ...PROPS} = this.props;
-		const VALUE = this.state.value;
 		const INPUT_CLASS = classNames([CLASSNAME, style.input]);
 		
 		return (
-			<input className={INPUT_CLASS} value={VALUE} onChange={this.handleChange} onBlur={this.handleBlur} {...PROPS}/>
+			<input className={INPUT_CLASS} value={this.state.value} onChange={this.handleChange} onBlur={this.handleBlur} {...PROPS}/>
 		);
 	}
 });
