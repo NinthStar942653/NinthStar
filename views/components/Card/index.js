@@ -33,19 +33,11 @@ export const CardTitle = React.createClass({
 export const CardImg = React.createClass({
 	render() {
 		// Get props
-		const {className: CLASSNAME, children: CHILDREN, ...PROPS} = this.props;
+		const {className: CLASSNAME, ...PROPS} = this.props;
 		const IMG_CLASS = classNames([CLASSNAME, style.img]);
 		
 		return (
-			<div className={IMG_CLASS} {...PROPS}>
-			{
-				React.Children.map(CHILDREN, item => {
-					return (
-						item
-					);
-				})
-			}
-			</div>
+			<div className={IMG_CLASS} {...PROPS}/>
 		);
 	}
 });
