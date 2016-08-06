@@ -15,6 +15,13 @@ export const Slider = React.createClass({
 			value: 0
 		};
 	},
+	componentWillMount() {
+		const VALUE = this.props.value;
+		
+		this.setState({
+			value: VALUE
+		});
+	},
 	render() {
 		// Get props
 		const {className: CLASSNAME, min: MIN, max: MAX, step, value, type, ...PROPS} = this.props;
