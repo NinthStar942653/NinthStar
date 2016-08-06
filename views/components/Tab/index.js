@@ -8,19 +8,10 @@ import style from './style';
 
 export const Tab = React.createClass({
 	getInitialState() {
-		return {
-			// Current active panel index
-			active_index: null
-		};
-	},
-	componentWillMount() {
-		// Get props
-		const CHILDREN = this.props.children;
-		
 		// Set initial active_index
 		let active_index = null;
 		
-		React.Children.map(CHILDREN, (panel, index) => {
+		React.Children.map(this.props.children, (panel, index) => {
 			// Get props
 			const ACTIVE = panel.props.active;
 			
@@ -41,7 +32,9 @@ export const Tab = React.createClass({
 			active_index = 0;
 		}
 		
-		this.state.active_index = active_index;
+		return {
+			active_index: active_index
+		};
 	},
 	render() {
 		// Get props
@@ -91,10 +84,14 @@ export const Tab = React.createClass({
 						switch (TYPE) {
 						case 'TabPanel':
 							// Get props
-							const {name, ...PROPS} = panel.props;
+							const {style: STYLE, ...PROPS} = panel.props;
+							const PANEL_STYLE = {
+								marginLeft: index === 0 ? -100 * this.state.active_index + '%' : 0,
+								...STYLE
+							}
 							
 							return (
-								<TabPanel ofs={index === 0 ? -100 * this.state.active_index + '%' : 0} {...PROPS}/>
+								<TabPanel style={PANEL_STYLE} {...PROPS}/>
 							);
 						default:
 						}
@@ -127,13 +124,21 @@ const TabSelector = React.createClass({
 });
 
 export const TabPanel = React.createClass({
+	propTypes: {
+		active: React.PropTypes.bool
+	},
+	getDefaultProps() {
+		return {
+			active: false
+		};
+	},
 	render() {
 		// Get props
-		const {className: CLASSNAME, ofs: OFS, style: STYLE, active, ...PROPS} = this.props;
+		const {className: CLASSNAME, active, ...PROPS} = this.props;
 		const PANEL_CLASS = classNames([CLASSNAME, style.panel]);
 		
 		return (
-			<div className={PANEL_CLASS} style={{marginLeft: OFS, ...STYLE}} {...PROPS}/>
+			<div className={PANEL_CLASS} {...PROPS}/>
 		);
 	}
 });

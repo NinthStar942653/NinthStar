@@ -9,17 +9,38 @@ import {Dialog} from '../../components/Dialog';
 import {Button} from '../../components/Button';
 import {Card, CardTitle, CardImg, CardItem} from '../../components/Card';
 import {Slider, SliderBar, SliderInput} from '../../components/Slider';
+import {Table} from '../../components/Table';
 
 import material from '../../public/material/material.scss';
 
 import Img_1 from '../../img/1.jpg';
 
+const column = [{
+	title: 'Name',
+	index: 'name',
+	sortable: true
+}, {
+	title: 'ID',
+	index: 'id',
+	sortable: true
+}];
+const data = [{
+	name: 'Alice',
+	id: 1
+}, {
+	name: 'Bob',
+	id: 2
+}, {
+	name: 'Steve',
+	id: 3
+}];
+
 export const MainPage = React.createClass({
 	render() {
 		return (
 			<div>
-				<Tab style={{color: "blue"}}>
-					<TabPanel name="Tab 1" style={{color: "red"}}>
+				<Tab>
+					<TabPanel name="Tab 1">
 						<h3>Tab Panel 1</h3>
 					</TabPanel>
 					<TabPanel name="Tab 2" active={true}>
@@ -32,7 +53,7 @@ export const MainPage = React.createClass({
 						<h3>Tab Panel 4</h3>
 					</TabPanel>
 				</Tab>
-				<Collapsable accordion={true}>
+				<Collapsable type="accordion">
 					<CollapsablePanel name="Collapsable 1">
 						<p>Collapsable Panel 1</p>
 						<p>Collapsable Panel 1</p>
@@ -43,23 +64,27 @@ export const MainPage = React.createClass({
 						<p>Collapsable Panel 2</p>
 						<p>Collapsable Panel 2</p>
 					</CollapsablePanel>
-					<CollapsablePanel name="Collapsable 3" disable={true}>
+					<CollapsablePanel name="Collapsable 3">
 						<p>Collapsable Panel 3</p>
 						<p>Collapsable Panel 3</p>
 						<p>Collapsable Panel 3</p>
 					</CollapsablePanel>
 				</Collapsable>
 				<Dialog visible={true}>
-					<div style={{position: 'relative', width: 100, height: 100, backgroundColor: "#00F"}}>
-						<Ripple/>
-					</div>
+					<Table column={column} data={data}/>
 					<Slider min={0} max={100} step={1} value={10}>
 						<SliderBar/>
 						<SliderInput/>
 					</Slider>
 				</Dialog>
-				<Button type='flat' rippleColor='red'>Click Me</Button>
-				<Button type='flat' rippleColor='blue'>Click Me</Button>
+				<Button type='flat' className={material.colorMain}>
+					<Ripple/>
+					Click Me
+				</Button>
+				<Button type='flat' className={material.colorMain}>
+					<Ripple color="red"/>
+					Click Me
+				</Button>
 				<Card style={{width: 400}}>
 					<CardTitle>This is a card</CardTitle>
 					<CardImg>

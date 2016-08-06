@@ -11,6 +11,14 @@ import material from '../../public/material/material.scss';
 import style from './style';
 
 export const Dialog = React.createClass({
+	propTypes: {
+		visible: React.PropTypes.bool
+	},
+	getDefaultProps() {
+		return {
+			visible: false
+		};
+	},
 	render() {
 		// Get props
 		const {className: CLASSNAME, style: STYLE, visible: VISIBLE, ...PROPS} = this.props;

@@ -10,27 +10,29 @@ import style from './style';
 import {Input} from '../Input';
 
 export const Slider = React.createClass({
+	propTypes: {
+		min: React.PropTypes.number,
+		max: React.PropTypes.number,
+		step: React.PropTypes.number,
+		value: React.PropTypes.number
+	},
+	getDefaultProps() {
+		return {
+			min: 0,
+			max: 1,
+			step: 1,
+			value: 0
+		}
+	},
 	getInitialState() {
 		return {
-			value: 0
+			value: this.props.value
 		};
-	},
-	componentDidMount() {
-		const VALUE = this.props.value;
-		
-		this.setState({
-			value: VALUE === undefined ? 0 : VALUE
-		});
 	},
 	render() {
 		// Get props
-		const {className: CLASSNAME, min: MIN, max: MAX, step, value, type, ...PROPS} = this.props;
+		const {className: CLASSNAME, min: MIN, max: MAX, step, value, ...PROPS} = this.props;
 		const SLIDER_CLASS = classNames([CLASSNAME, style.slider]);
-		
-		if (MIN === undefined || MAX === undefined || step === undefined) {
-			console.error('[Slider] Props not set.');
-			return;
-		}
 		
 		if (MIN > MAX) {
 			console.warn('[Slider] Min(' + MIN + ') is larger than max(' + MAX + ').');
@@ -49,7 +51,7 @@ export const Slider = React.createClass({
 						);
 					case 'SliderInput':
 						return (
-							<SliderInput value={this.state.value} onChange={this.setValue} {...sub.props}/>
+							<SliderInput value={this.state.value} setValue={this.setValue} {...sub.props}/>
 						);
 					default:
 						console.warn('[Slider] Illegal subcomponent "' + TYPE + '".');
@@ -73,10 +75,11 @@ export const Slider = React.createClass({
 export const SliderBar = React.createClass({
 	getInitialState() {
 		return {
+			mouseDown: false,
 			drag: false
 		};
 	},
-	handleClick(evt) {
+	handleMouseDown(evt) {
 		// Get props
 		const {min: MIN, max: MAX} = this.props;
 		const BAR = ReactDOM.findDOMNode(this);
@@ -85,14 +88,13 @@ export const SliderBar = React.createClass({
 		const VALUE = X * (MAX - MIN) / LENGTH + MIN;
 		
 		this.props.setValue(VALUE);
-	},
-	handleMouseDown(evt) {
+		
 		this.setState({
-			drag: true
+			mouseDown: true
 		});
 	},
 	handleMouseMove(evt) {
-		if (this.state.drag) {
+		if (this.state.mouseDown) {
 			// Get props
 			const {min: MIN, max: MAX} = this.props;
 			const BAR = ReactDOM.findDOMNode(this);
@@ -101,51 +103,50 @@ export const SliderBar = React.createClass({
 			const VALUE = X * (MAX - MIN) / LENGTH + MIN;
 			
 			this.props.setValue(VALUE);
+			
+			this.setState({
+				drag: true
+			});
 		}
 	},
 	handleMouseUp() {
 		this.setState({
+			mouseDown: false,
 			drag: false
 		});
 	},
 	handleMouseLeave() {
 		this.setState({
+			mouseDown: false,
 			drag: false
 		});
 	},
 	render() {
 		const {className: CLASSNAME, min: MIN, max: MAX, value: VALUE, type, setValue, ...PROPS} = this.props;
 		const BAR_CLASSNAME = classNames([CLASSNAME, style.bar]);
-		const BAR_DISPLAY_CLASSNAME = classNames([style.display]);
-		const CONTROLLER_STYLE = {
-			left: VALUE * 100 / (MAX - MIN) + '%'
+		const BAR_CLICKER_CLASSNAME = classNames([CLASSNAME, style.clicker]);
+		const BAR_OUTER_CLASSNAME = classNames([style.barOuter]);
+		const BAR_INNER_CLASSNAME = classNames([style.barInner]);
+		const BAR_INNER_STYLE = {
+			width: VALUE * 100 / (MAX - MIN) + '%',
+			transitionDuration: this.state.drag ? '0s' : ''
 		};
+		const CONTROLLER_OUTER_CLASS = classNames([style.controllerOuter]);
+		const CONTROLLER_INNER_CLASS = classNames([style.controllerInner]);
 		
 		return (
 			<div className={BAR_CLASSNAME}
-				onClick={this.handleClick}
 				onMouseDown={this.handleMouseDown}
 				onMouseMove={this.handleMouseMove}
 				onMouseUp={this.handleMouseUp}
 				onMouseLeave={this.handleMouseLeave}
 				{...PROPS}>
-				<div className={BAR_DISPLAY_CLASSNAME}/>
-				<SliderController style={CONTROLLER_STYLE}/>
-			</div>
-		);
-	}
-});
-
-const SliderController = React.createClass({
-	render() {
-		// Get props
-		const STYLE = this.props.style;
-		const CONTROLLER_OUTER_CLASS = classNames([style.outer]);
-		const CONTROLLER_INNER_CLASS = classNames([style.inner]);
-		
-		return (
-			<div className={CONTROLLER_OUTER_CLASS} style={STYLE}>
-				<div className={CONTROLLER_INNER_CLASS}/>
+				<div className={BAR_OUTER_CLASSNAME}>
+					<div className={BAR_INNER_CLASSNAME} style={BAR_INNER_STYLE}/>
+					<div className={CONTROLLER_OUTER_CLASS}>
+						<div className={CONTROLLER_INNER_CLASS}/>
+					</div>
+				</div>
 			</div>
 		);
 	}

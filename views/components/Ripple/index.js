@@ -8,6 +8,14 @@ import material from '../../public/material/material.scss';
 import style from './style';
 
 export const Ripple = React.createClass({
+	propTypes: {
+		color: React.PropTypes.oneOf(['white', 'red', 'blue'])
+	},
+	getDefaultProps() {
+		return {
+			color: 'white'
+		};
+	},
 	getInitialState() {
 		return {
 			// ID counter
@@ -26,8 +34,8 @@ export const Ripple = React.createClass({
 		// Add new effect
 		effectsProps.push({
 			key: this.state.counter,
-			x: evt.pageX - RIPPLE.getBoundingClientRect().left,
-			y: evt.pageY - RIPPLE.getBoundingClientRect().top,
+			x: evt.pageX - RIPPLE.getBoundingClientRect().left - document.documentElement.scrollLeft,
+			y: evt.pageY - RIPPLE.getBoundingClientRect().top - document.documentElement.scrollTop,
 			scale: Math.sqrt(RIPPLE.offsetWidth * RIPPLE.offsetWidth + RIPPLE.offsetHeight * RIPPLE.offsetHeight)
 		});
 		
@@ -39,20 +47,14 @@ export const Ripple = React.createClass({
 	},
 	render() {
 		// Get props
-		const COLOR = this.props.color;
 		const RIPPLE_CLASS = classNames([style.ripple]);
-		
-		// Unknown color
-		if (COLOR !== undefined && COLOR !== 'white' && style[COLOR] === undefined) {
-			console.warn('[Ripple] Unknown color "' + COLOR + '". Regard as not set(default white).');
-		}
 		
 		return (
 			<div className={RIPPLE_CLASS} onMouseDown={this.handleMouseDown}>
 			{
 				this.state.effectsProps.map((effectProps, index) => {
 					return (
-						<RippleEffect className={style[COLOR]} key={effectProps.key} effectProps={effectProps} rippleHide={this.rippleHide}/>
+						<RippleEffect className={style[this.props.color]} key={effectProps.key} effectProps={effectProps} rippleHide={this.rippleHide}/>
 					);
 				})
 			}
@@ -112,8 +114,7 @@ const RippleEffect = React.createClass({
 	},
 	render() {
 		// Get props
-		const CLASSNAME = this.props.className;
-		const RIPPLE_EFFECT_CLASS = classNames([CLASSNAME, style.rippleEffect, material.animate]);
+		const RIPPLE_EFFECT_CLASS = classNames([this.props.className, style.rippleEffect, material.animate]);
 		const RIPPLE_EFFECT_STYLE = {
 			// Set visibility acoording to this.props.effectProps and this.state
 			top: this.props.effectProps.y,

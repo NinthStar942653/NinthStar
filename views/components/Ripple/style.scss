@@ -15,14 +15,10 @@
 		position: absolute;
 		width:  2px;
 		height: 2px;
-		background-color: $color-white;
 		border-radius: 100%;
 		
-		&.red {
-			background-color: $color-red;
-		}
-		&.blue {
-			background-color: $color-blue;
-		}
+		&.white { background-color: $color-white; }
+		&.red   { background-color: $color-red; }
+		&.blue  { background-color: $color-blue; }
 	}
 }

@@ -8,30 +8,36 @@ import material from '../../public/material/material.scss';
 import style from './style';
 
 export const Collapsable = React.createClass({
+	propTypes: {
+		type: React.PropTypes.oneOf(['normal', 'accordion'])
+	},
+	getDefaultProps() {
+		return {
+			type: 'normal'
+		};
+	},
 	getInitialState() {
 		return {
 			// Panel active state array
 			active: []
 		};
 	},
-	componentDidMount() {
+	componentWillMount() {
 		// Get props
-		const {children: CHILDREN, accordion: ACCORDION} = this.props;
+		const {children: CHILDREN, type: TYPE} = this.props;
 		
 		// Variables
 		let active_index = null;
 		let active = [];
 		
 		React.Children.map(CHILDREN, (item, index) => {
-			const ACTIVE = item.props.active;
-			
-			// No active
-			if (ACTIVE === undefined) {
-				active[index] = false;
 			// Active
-			} else {
+			if (item.props.active) {
+				// Normal type collapsable
+				if (TYPE === 'normal') {
+					active[index] = true;
 				// Accortion type collapsable
-				if (ACCORDION === true) {
+				} else {
 					// No active panel yet
 					if (active_index === null) {
 						active_index = index;
@@ -41,10 +47,10 @@ export const Collapsable = React.createClass({
 						active[index] = false;
 						console.warn('[Collapsable] More than one active panel in accordion type. Only the first one will be set active.');
 					}
-				// Normal type collapsable
-				} else {
-					active[index] = true;
 				}
+			// No active
+			} else {
+				active[index] = false;
 			}
 		});
 		
@@ -54,7 +60,7 @@ export const Collapsable = React.createClass({
 	},
 	render() {
 		// Get props
-		const {className: CLASSNAME, children: CHILDREN, accordion, ...PROPS} = this.props;
+		const {className: CLASSNAME, children: CHILDREN, type, ...PROPS} = this.props;
 		const COLLAPSABLE_CLASS = classNames([CLASSNAME, material.shadow1]);
 		
 		return (
@@ -81,20 +87,17 @@ export const Collapsable = React.createClass({
 		);
 	},
 	collapsableTrigger(index) {
-		// Get props
-		const ACCORDION = this.props.accordion;
-		
 		// Get state
 		let active = this.state.active;
 		
+		// Normal type collapsable
+		if (this.props.type === 'normal') {
+			active[index] = !active[index];
 		// Accordion type collapsable
-		if (ACCORDION === true) {
+		} else {
 			for (let i = 0, l = active.length; i < l; ++i) {
 				active[i] = i === index ? !active[index] : false;
 			}
-		// Normal type collapsable
-		} else {
-			active[index] = !active[index];
 		}
 		
 		this.setState({
@@ -106,12 +109,12 @@ export const Collapsable = React.createClass({
 const CollapsableItem = React.createClass({
 	render() {
 		// Get props
-		const {className: CLASSNAME, name: NAME, index: INDEX, disable: DISABLE, collapsableTrigger: COLLAPSABLE_TRIGGER, ...PROPS} = this.props;
+		const {className: CLASSNAME, name: NAME, index: INDEX, collapsableTrigger: COLLAPSABLE_TRIGGER, ...PROPS} = this.props;
 		const ITEM_CLASS = classNames([CLASSNAME, style.item]);
 		
 		return (
 			<div className={ITEM_CLASS}>
-				<CollapsableTrigger index={INDEX} disable={DISABLE} collapsableTrigger={COLLAPSABLE_TRIGGER}>
+				<CollapsableTrigger index={INDEX} collapsableTrigger={COLLAPSABLE_TRIGGER}>
 				{
 					NAME
 				}
@@ -124,30 +127,28 @@ const CollapsableItem = React.createClass({
 
 const CollapsableTrigger = React.createClass({
 	handleClick() {
-		// Get props
-		const DISABLE = this.props.disable;
-		
-		// Not disable
-		if (!DISABLE) {
-			this.props.collapsableTrigger(this.props.index);
-		}
+		this.props.collapsableTrigger(this.props.index);
 	},
 	render() {
 		// Get props
-		const DISABLE = this.props.disable;
-		const TRIGGER_CLASS = classNames([material.shadow1, style.trigger, DISABLE ? style.disable : '']);
+		const {index, collapsableTrigger, ...PROPS} = this.props;
+		const TRIGGER_CLASS = classNames([material.shadow1, style.trigger]);
 		
 		return (
-			<div className={TRIGGER_CLASS} onClick={this.handleClick}>
-			{
-				this.props.children
-			}
-			</div>
+			<div className={TRIGGER_CLASS} onClick={this.handleClick} {...PROPS}/>
 		);
 	}
 });
 
 export const CollapsablePanel = React.createClass({
+	propTypes: {
+		active: React.PropTypes.bool
+	},
+	getDefaultProps() {
+		return {
+			active: false
+		}
+	},
 	getInitialState() {
 		return {
 			// Display height
